@@ -2,22 +2,22 @@
 import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 // 3. Структурні / Лейаут компоненти (Контейнери)
-import Section from "../Section/Section";
+import Section from "./components/Section/Section";
 import Container from "../Container/Container";
 
 // 4. Функціональні компоненти додатку
-const HomeLayout = lazy(() => import("../../layouts/HomeLayout"));
-const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const HomeLayout = lazy(() => import("./layouts/HomeLayout"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("../../pages/MoviesPage/MoviesPage"));
 const MovieDetailsPage = lazy(
   () => import("../../pages/MovieDetailsPage/MovieDetailsPage"),
 );
-const MovieCast = lazy(() => import("../../components/MovieCast/MovieCast"));
+const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
 const MovieReviews = lazy(
-  () => import("../../components/MovieReviews/MovieReviews"),
+  () => import("./components/MovieReviews/MovieReviews"),
 );
 const NotFoundPage = lazy(
-  () => import("../../pages/NotFoundPage/NotFoundPage"),
+  () => import("./pages/NotFoundPage/NotFoundPage"),
 );
 
 const App = () => {
