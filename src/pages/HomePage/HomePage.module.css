@@ -1,0 +1,32 @@
+.container {
+    padding: 0 20px;
+    /* Бічні відступи, щоб контент стояв в один рівень із шапкою */
+    margin-bottom: 40px;
+    /* Простір знизу сторінки */
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a202c;
+    /* Глибокий темний колір для головного заголовка */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* Відступ від заголовка до списку фільмів */
+}
+
+/* Стилі для лоадера */
+.statusMessage {
+    margin: 30px 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Стиль для тексту помилки */
+.errorMessage {
+    font-size: 16px;
+    color: #e53e3e;
+    /* Червоний колір для інформування про помилку запиту */
+    font-weight: 500;
+    margin: 20px 0;
+}
