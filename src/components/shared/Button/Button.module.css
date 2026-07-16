@@ -1,0 +1,39 @@
+/* Базовые стили для всех кнопок */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 200px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    padding: 16px 60px;
+    /* Размеры по макету для Show more */
+}
+
+/* Вариант "primary" (зеленая кнопка для Show more и Book now) */
+.primary {
+    background-color: #859f8f;
+    /* Зеленый оттенок с макета */
+    color: #ffffff;
+}
+
+.primary:hover {
+    background-color: #6d8576;
+    /* Темнее при ховере */
+}
+
+/* Вариант "secondary" (прозрачная кнопка с бордером для Load more и Clear filters) */
+.secondary {
+    background-color: transparent;
+    color: #101828;
+    border: 1px solid rgba(16, 24, 40, 0.2);
+}
+
+.secondary:hover {
+    border-color: #101828;
+}

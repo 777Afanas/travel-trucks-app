@@ -1,102 +1,64 @@
-import { Suspense, useEffect, useState } from "react";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from "react-router-dom";
-import { getMovieDetails } from "../../api/movies-api";
-import Loader from "../../components/Loader/Loader";
-import styles from "./MovieDetailsPage.module.css";
-import clsx from "clsx";
 
-const linkClass = ({ isActive }) => {
-  return clsx(styles.link, isActive && styles.isActive);
+// import styles from './DetailsPage.module.css';
+// import CamperGallery from './components/CamperGallery/CamperGallery';
+// import CamperInfo from './components/CamperInfo/CamperInfo';
+// import VehicleDetails from './components/VehicleDetails/VehicleDetails';
+// import ReviewList from './components/ReviewList/ReviewList';
+// import BookingForm from './components/BookingForm/BookingForm';
+
+// Резервні фейкові дані для тестування після перезавантаження сторінки
+const DEFAULT_MOCK_CAMPER = {
+  id: "1",
+  name: "Mavericks",
+  price: 8000,
+  rating: 4.4,
+  reviewsCount: 2,
+  location: "Kyiv, Ukraine",
+  // Переконайтеся, що масив images не пустий, щоб галерея не ламалася
+  images: [
+    "https://ftp.goit.study/img/campers-ca-posts/1-1.jpg",
+    "https://ftp.goit.study/img/campers-ca-posts/1-2.jpg"
+  ], 
+  description: "Embrace simplicity and freedom with the Mavericks panel truck, an ideal choice for solo travelers or couples...",
+  reviews: [] // Пустий масив відгуків для тестування
 };
 
-const MovieDetailsPage = () => {
-  const { movieId } = useParams();
-  const [movie, setMovie] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  const MovieDetailsPageLocation = useLocation();  // MovieListLocation
-  const backLinkHref = MovieDetailsPageLocation.state?.from ?? "/"; 
-  
+// const DetailsPage = ({ camperData }) => {
+const DetailsPage = ({ camperData }) => {
+    const data = camperData || DEFAULT_MOCK_CAMPER;
 
-  const defaultPng =
-    "https://cdn.pixabay.com/photo/2016/05/28/05/40/question-mark-1421017_1280.png";
+  return ( 
+    <p>DetailsPage: {data.name}</p>
 
-  useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-      try {
-        const data = await getMovieDetails(movieId);
-        setMovie(data);
-      } catch {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getData();
-  }, [movieId]);
+    // <div className={styles.mainContent}>
+    //   {/* Верхній блок: Галерея зліва, Опис справа */}
+    //   <section className={styles.topSection}>
+    //     <div className={styles.galleryCol}>
+    //       <CamperGallery images={camperData.images} />
+    //     </div>
+    //     <div className={styles.infoCol}>
+    //       <CamperInfo camper={camperData} />
+    //     </div>
+    //   </section>
 
-  
-  return (
-    <div>
-      <Link to={ backLinkHref }>Go back</Link>
-      {isLoading && <Loader />}
-      {error && <p>Something is wrong! Reload...</p>}
-      {movie && (
-        <div className={styles.div}>
-          <img
-            src={
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                : defaultPng
-            }
-            alt={movie.title || "Default title"}
-            width={300}
-          />
-          <div className={styles.divDetails}>
-            <h2 className={styles.details}>
-              {movie.title || movie.original_title} (
-              {movie.release_date?.slice(0, 4) || "Unknown year"})
-            </h2>
-            <p className={styles.details}>
-              User score: {Math.round(movie.vote_average * 10)}%
-            </p>
-            <h3 className={styles.details}>Overview</h3>
-            <p className={styles.details}>{movie.overview}</p>
-            <h3 className={styles.details}>Genres</h3>
-            <p className={styles.details}>
-              {movie.genres?.map((genre) => genre.name).join(", ") ||
-                "No genres available"}
-            </p>
-          </div>
-        </div>
-      )}
-      <hr style={{ width: "100%" }} />
-      <p>Additional information</p>
-      <ul>
-        <li>
-          <NavLink to="cast" state={{ from: backLinkHref }} className={linkClass}>
-            Casts
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="reviews" state={{ from: backLinkHref }} className={linkClass}>
-            Reviews
-          </NavLink>
-        </li>
-      </ul>
-      <Suspense fallback={<div>LOADING SUB COMPONENT...</div>}>
-        <Outlet />
-      </Suspense>
-    </div>
+    //   {/* Середній блок: Технічні характеристики кемпера */}
+    //   <section className={styles.middleSection}>
+    //     <VehicleDetails camper={camperData} />
+    //   </section>
+
+    //   {/* Нижній блок: Відгуки зліва, форма бронювання справа */}
+    //   <section className={styles.bottomSection}>
+    //     <div className={styles.reviewsCol}>
+    //       <ReviewList reviews={camperData.reviews} />
+    //     </div>
+    //     <div className={styles.bookingCol}>
+    //       <BookingForm camperId={camperData.id} />
+    //     </div>
+    //   </section>
+    // </div> 
+
   );
 };
 
-export default MovieDetailsPage;
+export default DetailsPage;

@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Navigation from "../components/Navigation/Navigation"
+import Header from "../components/Header/Header"
 
 const HomeLayout = () => {
   return (
-    <div>
-      < Navigation />
-      <Outlet />
+    <div className="page-wrapper">
+      <Header />
+      <main>
+        <Outlet /> {/* подставяться Home, Catalog, Details */}
+      </main>
     </div>
   )
 }

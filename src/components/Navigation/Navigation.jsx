@@ -6,17 +6,20 @@ const makeLinkClass = ({ isActive}) => clsx(styles.link, isActive && styles.acti
 
 const Navigation = () => {
   return (
-    <header>
-      <nav className={styles.nav}>
-        <NavLink to="/" className={makeLinkClass}>
-          Home
-        </NavLink>
-        <NavLink to="/movies" className={makeLinkClass}>
-          Movies
-        </NavLink>
-      </nav>
-      <hr style={{ width: "100%" }} />
-    </header>     
+    <nav className={styles.nav}>
+      <ul className={styles.navList}>
+        <li className={styles.navItem}>
+          <NavLink to="/" className={makeLinkClass}>
+            Home
+          </NavLink>
+        </li>
+        <li className={styles.navItem}>
+          <NavLink to="/catalog" className={makeLinkClass}>
+            Catalog
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
   )
 }
 

@@ -1,79 +1,51 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { getSearchMovie } from "../../api/movies-api";
-import SearchBox from "../../components/SearchBox/SearchBox";
-import Loader from "../../components/Loader/Loader";
-import MovieList from "../../components/MovieList/MovieList";
-import styles from "./MoviesPage.module.css";
+// import React, { useState } from 'react';
+// import SidebarFilter from '../components/SidebarFilter/SidebarFilter';
+import CamperList from "../../components/catalog/CamperList/CamperList";
+// import Button from '../components/Button/Button';
 
-const MoviesPage = () => {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const handlerSubmit = (value) => {
-    // setSearchParams({ q: value });
-    const trimmedValue = value.trim();
-
-    if (trimmedValue === "") {
-      searchParams.delete("q"); // Очищаємо URL, якщо інпут порожній
-    } else {
-      searchParams.set("q", trimmedValue); // Безпечно додаємо або оновлюємо "q"
-    } 
-    setSearchParams(searchParams); // Записуємо оновлені параметри в URL
-  };
-
-  const searchQuery = searchParams.get("q");
-
-  useEffect(() => {
-    if (!searchQuery) return;
-
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(false);
-      setMovies([]);
-
-      try {
-        const data = await getSearchMovie(searchQuery);
-        setMovies(data);
-      } catch {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [searchQuery]);
+const CatalogPage = () => {
+  // const [campers, setCampers] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className={styles.container}>
-      <SearchBox onHandlerSubmit={handlerSubmit} />
-
-      {isLoading && (
-        <div className={styles.statusMessage}>
-          <Loader />
-        </div>
-      )}
-
-      {error && (
-        <p className={styles.statusMessage}>
-          Something is wrong! Reload page, please...
-        </p>
-      )}
-
-      {!isLoading && !error && movies.length > 0 && (
-        <MovieList movies={movies} />
-      )}
-
-      {/* Повідомлення для користувача, якщо за запитом нічого не знайдено */}
-      {!isLoading && !error && searchQuery && movies.length === 0 && (
-        <p className={styles.noResults}>
-          No movies found for "{searchQuery}". Try another search!
-        </p>
-      )}
+    <div>
+      <p>CatalogPage</p>
+      <CamperList />
     </div>
+
+    // <main className="catalog-container">
+    //   {/* Бокова панель з фільтрами */}
+    //   <SidebarFilter />
+
+    //   {/* Умовний рендеринг станів безпосередньо на сторінці */}
+    //   <div className="catalog-content">
+    //     {isLoading && (
+    //       <div className="loader-backdrop">
+    //         <div className="loader-card">
+    //           <div className="spinner"></div>
+    //           <h2>Loading tracks...</h2>
+    //           <p>Please wait while we fetch the best travel trucks for you</p>
+    //         </div>
+    //       </div>
+    //     )}
+
+    //     {!isLoading && campers.length === 0 && (
+    //       <div className="empty-state">
+    //         <h2>No campers found</h2>
+    //         <p>Try adjusting your search or clearing some filters.</p>
+    //         <div className="empty-actions">
+    //           <Button variant="secondary">Clear filters</Button>
+    //           <Button variant="primary">View all campers</Button>
+    //         </div>
+    //       </div>
+    //     )}
+
+    //     {!isLoading && campers.length > 0 && (
+    //       <CamperList campers={campers} />
+    //     )}
+    //   </div>
+    // </main>
   );
 };
 
-export default MoviesPage;
+export default CatalogPage;
