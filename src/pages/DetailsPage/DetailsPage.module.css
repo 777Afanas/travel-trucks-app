@@ -1,31 +1,32 @@
-.div {
-    /* display: flex; */
-    gap: 20px;
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 64px;
 }
 
-ul {
-    /* display: flex; */
-    gap: 12px;
-    flex-wrap: wrap;
+/* Головна сітка сайту */
+.pageLayout {
+    display: flex;
+    gap: 64px;
+    /* Відступ між лівою та правою частинами */
+    align-items: flex-start;
 }
 
-.details {
-    text-align: left;
+/* Ліва колонка займає весь доступний простір */
+.leftColumn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    /* Відступ між Галереєю та Відгуками */
 }
 
-.divDetails {
-    margin-left: 12px;
-}
-
-.btn {
-    width: 120px;
-    height: 24px;
-    color: rgb(0, 15, 0);
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.btn :hover,
-:focus {
-    color: #a94d4d;
+/* Права колонка має фіксовану ширину кузова форми та карток */
+.rightColumn {
+    width: 448px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* Відступ між інфо, деталями та формою бронювання */
 }

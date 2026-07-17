@@ -7,10 +7,7 @@ const HomeLayout = lazy(() => import("./layouts/HomeLayout"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const CatalogPage = lazy(() => import("./pages/CatalogPage/CatalogPage"));
 const DetailsPage = lazy(() => import("./pages/DetailsPage/DetailsPage"));
-// const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
-// const MovieReviews = lazy(
-//   () => import("./components/MovieReviews/MovieReviews"),
-// );
+
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {

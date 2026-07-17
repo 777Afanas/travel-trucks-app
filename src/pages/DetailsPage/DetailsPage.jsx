@@ -1,64 +1,51 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCamperById } from '../redux/operations'; // Ваш асинхронний запит з Axios
+import { selectCamperDetails, selectIsLoading } from '../redux/selectors';
 
-// import styles from './DetailsPage.module.css';
-// import CamperGallery from './components/CamperGallery/CamperGallery';
-// import CamperInfo from './components/CamperInfo/CamperInfo';
-// import VehicleDetails from './components/VehicleDetails/VehicleDetails';
-// import ReviewList from './components/ReviewList/ReviewList';
-// import BookingForm from './components/BookingForm/BookingForm';
+import CamperInfo from '../components/CamperInfo/CamperInfo';
+import CamperGallery from '../components/CamperGallery/CamperGallery';
+import VehicleDetails from '../components/VehicleDetails/VehicleDetails';
+import ReviewList from '../components/ReviewList/ReviewList';
+import BookForm from '../components/BookForm/BookForm';
+import Loader from '../components/Loader/Loader'; 
 
-// Резервні фейкові дані для тестування після перезавантаження сторінки
-const DEFAULT_MOCK_CAMPER = {
-  id: "1",
-  name: "Mavericks",
-  price: 8000,
-  rating: 4.4,
-  reviewsCount: 2,
-  location: "Kyiv, Ukraine",
-  // Переконайтеся, що масив images не пустий, щоб галерея не ламалася
-  images: [
-    "https://ftp.goit.study/img/campers-ca-posts/1-1.jpg",
-    "https://ftp.goit.study/img/campers-ca-posts/1-2.jpg"
-  ], 
-  description: "Embrace simplicity and freedom with the Mavericks panel truck, an ideal choice for solo travelers or couples...",
-  reviews: [] // Пустий масив відгуків для тестування
-};
+import css from './DetailPage.module.css';
 
+const DetailPage = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const camper = useSelector(selectCamperDetails);
+  const isLoading = useSelector(selectIsLoading);
 
-// const DetailsPage = ({ camperData }) => {
-const DetailsPage = ({ camperData }) => {
-    const data = camperData || DEFAULT_MOCK_CAMPER;
+  useEffect(() => {
+    dispatch(fetchCamperById(id));
+  }, [dispatch, id]);
 
-  return ( 
-    <p>DetailsPage: {data.name}</p>
+  if (isLoading) return <Loader />;
+  if (!camper) return null;
 
-    // <div className={styles.mainContent}>
-    //   {/* Верхній блок: Галерея зліва, Опис справа */}
-    //   <section className={styles.topSection}>
-    //     <div className={styles.galleryCol}>
-    //       <CamperGallery images={camperData.images} />
-    //     </div>
-    //     <div className={styles.infoCol}>
-    //       <CamperInfo camper={camperData} />
-    //     </div>
-    //   </section>
+  return (
+    <div className={css.container}>
+      {/* Уся сторінка — це єдиний двоколонковий Flex/Grid контейнер */}
+      <div className={css.pageLayout}>
+        
+        {/* ЛІВА КОЛОНКА */}
+        <div className={css.leftColumn}>
+          <CamperGallery images={camper.images} />
+          <ReviewList reviews={camper.reviews} />
+        </div>
 
-    //   {/* Середній блок: Технічні характеристики кемпера */}
-    //   <section className={styles.middleSection}>
-    //     <VehicleDetails camper={camperData} />
-    //   </section>
+        {/* ПРАВА КОЛОНКА */}
+        <div className={css.rightColumn}>
+          <CamperInfo camper={camper} />
+          <VehicleDetails camper={camper} />
+          <BookForm camperId={id} />
+        </div>
 
-    //   {/* Нижній блок: Відгуки зліва, форма бронювання справа */}
-    //   <section className={styles.bottomSection}>
-    //     <div className={styles.reviewsCol}>
-    //       <ReviewList reviews={camperData.reviews} />
-    //     </div>
-    //     <div className={styles.bookingCol}>
-    //       <BookingForm camperId={camperData.id} />
-    //     </div>
-    //   </section>
-    // </div> 
-
+      </div>
+    </div>
   );
 };
-
-export default DetailsPage;
+export default DetailPage;
