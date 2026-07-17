@@ -6,13 +6,13 @@
     gap: 10px;
     /* Відступ між іконкою та текстом (наприклад, для х у Clear filters) */
 
+    text-decoration: none; /* Гарантує, що текст у Link не буде підкресленим */
     font-family: inherit;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
 
-    padding: 16px 60px;
-    /* Стандартний великий падінг */
+    padding: 16px 60px;     /* Стандартний великий падінг */
     border-radius: 200px;
     cursor: pointer;
     border: 1px solid transparent;
@@ -22,9 +22,9 @@
 /* Модифікатор ширини */
 .fullWidth {
     width: 100%;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     /* Зменшуємо бокові падінги для адаптивності */
-    padding-right: 20px;
+    /* padding-right: 20px; */
 }
 
 /* Основна зелена кнопка (View Now, Search, Send, Show more) */

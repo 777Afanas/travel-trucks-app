@@ -1,29 +1,27 @@
-.container {
-    padding: 0 20px;
-    /* Бічні відступи, які вирівнюють сторінку по лінії навігації */
-    margin-bottom: 40px;
-    /* Відступ знизу сторінки, щоб список фільмів не притискався до футера */
+
+.catalogContainer {
+    display: flex;
+    gap: 64px;
+    /* Відступ між фільтрами та картками згідно з макетом */
+    padding: 40px 0;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
-/* Стиль для повідомлення про завантаження (Loader) або помилку */
-.statusMessage {
-    font-size: 16px;
-    font-weight: 500;
-    color: #4a5568;
-    /* Приємний темно-сірий колір тексту */
-    margin: 20px 0;
+.catalogContent {
+    flex-grow: 1;
+    position: relative;
+    /* Для позиціонування лоадера, якщо треба */
 }
 
-/* Стиль для повідомлення "No movies found..." */
-.noResults {
-    font-size: 16px;
-    color: #718096;
-    /* Трохи світліший сірий колір */
-    margin-top: 20px;
-    padding: 12px;
-    background-color: #f7fafc;
-    /* Легкий фоновий колір, щоб виділити плашку */
-    border-left: 4px solid #cbd5e0;
-    /* Сіра смужка ліворуч для акценту */
-    border-radius: 4px;
+.loaderBackdrop {
+    /* Стилі для розмиття або затемнення заднього фону */
+}
+
+.loaderCard {
+    /* Стилі картки завантаження по центру */
+}
+
+.spinner {
+    /* Анімація спінера */
 }
