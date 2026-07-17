@@ -16,7 +16,8 @@ const ALL_MOCK_CAMPERS = [
 
 const CatalogPage = () => {
   // Початковий стейт порожній — сигнал для CamperList увімкнути дефолтні моки
-  const [campers, setCampers] = useState([]);
+  // const [campers, setCampers] = useStat([]);   
+  const [campers, setCampers] = useState(ALL_MOCK_CAMPERS);   
   const [isLoading, setIsLoading] = useState(false);
 
   // Логіка фільтрації (імітація запиту до сервера)
@@ -80,9 +81,16 @@ const CatalogPage = () => {
         )}
 
         {/* СТАН 3: Успішно завантажені або дефолтні дані */}
-        {!isLoading && campers !== null && (
+        {/* {!isLoading && campers !== null && (
           <CamperList campers={campers.length > 0 ? campers : null} />
-        )}
+        )} */}
+        {!isLoading && campers !== null && (
+  <CamperList key={campers.length} campers={campers} />
+)}
+
+        {/* {!isLoading && campers && campers.length > 0 && (
+  <CamperList key={campers.length} campers={campers} />
+)} */}
         
       </div>
     </main>

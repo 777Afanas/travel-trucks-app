@@ -1,4 +1,5 @@
-import { useState } from 'react';
+
+import { useState } from 'react'; 
 import css from './BookForm.module.css';
 
 const BookForm = ({ camperId }) => {
@@ -12,7 +13,7 @@ const BookForm = ({ camperId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Тут логіка відправки запиту через Axios за потреби
-    alert('Booking successful! We will contact you soon.');
+    alert("Booking camper with ID:", camperId);
     setFormData({ name: '', email: '', date: '', comment: '' });
   };
 
@@ -31,5 +32,6 @@ const BookForm = ({ camperId }) => {
     </div>
   );
 };
+
 
 export default BookForm;

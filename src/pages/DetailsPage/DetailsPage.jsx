@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCamperById } from '../redux/operations'; // Ваш асинхронний запит з Axios
-import { selectCamperDetails, selectIsLoading } from '../redux/selectors';
+import { fetchCamperById } from '../../redux/ops'; // Ваш асинхронний запит з Axios
+import { selectCamperDetails, selectIsLoading } from '../../redux/sliсe';
 
-import CamperInfo from '../components/CamperInfo/CamperInfo';
-import CamperGallery from '../components/CamperGallery/CamperGallery';
-import VehicleDetails from '../components/VehicleDetails/VehicleDetails';
-import ReviewList from '../components/ReviewList/ReviewList';
-import BookForm from '../components/BookForm/BookForm';
-import Loader from '../components/Loader/Loader'; 
+import CamperInfo from '../../components/details/CamperInfo/CamperInfo';
+import CamperGallery from '../../components/details/CamperGallery/CamperGallery';
+import VehicleDetails from '../../components/details/VehicleDetails/VehicleDetails';
+import ReviewList from '../../components/details/ReviewList/ReviewList';
+import BookForm from '../../components/details/BookForm/BookForm';
+import Loader from '../../components/shared/Loader/Loader'; 
 
-import css from './DetailPage.module.css';
+import css from './DetailsPage.module.css';
 
 const DetailPage = () => {
   const { id } = useParams();

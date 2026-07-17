@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CamperCard from '../CamperCard/CamperCard';
 import Button from '../../shared/Button/Button';
 
@@ -10,16 +10,16 @@ const MOCK_CAMPERS = [
   { id: "5", name: "Seeker", price: 6800, rating: 4.0, reviewsCount: 3, location: "Kharkiv, Ukraine", image: "https://ftp.goit.study/img/campers-ca-posts/5-1.jpg", form: "PanelTruck" },
   { id: "6", name: "Trailblazer", price: 10500, rating: 4.6, reviewsCount: 8, location: "Dnipro, Ukraine", image: "https://ftp.goit.study/img/campers-ca-posts/6-1.jpg", form: "Alcove" }
 ];
-
+//  const ITEMS_PER_PAGE = 2;
 const CamperList = ({ campers }) => {
   const ITEMS_PER_PAGE = 2;
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   // Скидаємо лічильник до 2 щоразу, коли змінюються результати фільтрації в CatalogPage
-  useEffect(() => {
-    setVisibleCount(ITEMS_PER_PAGE);
-  }, [campers]);
+  // useEffect(() => {
+  //   setVisibleCount(ITEMS_PER_PAGE);
+  // }, [campers, ITEMS_PER_PAGE]);
 
   // Джерело даних: або відфільтровані з пропсів, або дефолтні моки
   const sourceData = campers ? campers : MOCK_CAMPERS;
