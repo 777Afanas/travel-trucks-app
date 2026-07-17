@@ -1,39 +1,50 @@
-/* Базовые стили для всех кнопок */
+/* Базовий клас для всіх кнопок */
 .button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    /* Відступ між іконкою та текстом (наприклад, для х у Clear filters) */
+
     font-family: inherit;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
-    border-radius: 200px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+
     padding: 16px 60px;
-    /* Размеры по макету для Show more */
+    /* Стандартний великий падінг */
+    border-radius: 200px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-/* Вариант "primary" (зеленая кнопка для Show more и Book now) */
+/* Модифікатор ширини */
+.fullWidth {
+    width: 100%;
+    padding-left: 20px;
+    /* Зменшуємо бокові падінги для адаптивності */
+    padding-right: 20px;
+}
+
+/* Основна зелена кнопка (View Now, Search, Send, Show more) */
 .primary {
     background-color: #859f8f;
-    /* Зеленый оттенок с макета */
     color: #ffffff;
 }
 
 .primary:hover {
     background-color: #6d8576;
-    /* Темнее при ховере */
 }
 
-/* Вариант "secondary" (прозрачная кнопка с бордером для Load more и Clear filters) */
+/* Другорядна (Load more, Clear filters) */
 .secondary {
     background-color: transparent;
     color: #101828;
-    border: 1px solid rgba(16, 24, 40, 0.2);
+    border-color: rgba(16, 24, 40, 0.2);
 }
 
 .secondary:hover {
     border-color: #101828;
+    background-color: rgba(16, 24, 40, 0.02);
 }

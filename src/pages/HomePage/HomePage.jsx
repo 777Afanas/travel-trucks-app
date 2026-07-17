@@ -1,7 +1,12 @@
-import Hero from '../../components/home/Hero/Hero'; // Корректируйте путь, если Hero лежит в другой папке
+import Hero from '../../components/home/Hero/Hero';
 
 const HomePage = () => {
-  return <Hero />;
+  return (
+    <>
+      <Hero />
+      {/* Тут будуть інші секції */}
+    </>
+  );
 };
 
 export default HomePage;

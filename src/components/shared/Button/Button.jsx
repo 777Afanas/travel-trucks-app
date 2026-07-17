@@ -1,13 +1,20 @@
+
 import styles from './Button.module.css';
 
 const Button = ({ 
   children, 
   onClick, 
   type = 'button', 
-  variant = 'primary' // 'primary' (Show more) или 'secondary' (Load more)
+  variant = 'primary', // 'primary' або 'secondary'
+  fullWidth = false     // якщо true, кнопка розтягнеться на 100%
 }) => {
-  // Динамически объединяем базовый класс кнопки и класс выбранного варианта
-  const buttonClassName = `${styles.button} ${styles[variant] || ''}`.trim();
+  
+  // Збираємо класи в один рядок
+  const buttonClassName = [
+    styles.button,
+    styles[variant],
+    fullWidth ? styles.fullWidth : ''
+  ].join(' ').trim();
 
   return (
     <button 
