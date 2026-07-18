@@ -29,7 +29,7 @@ const SidebarFilter = ({ onFilterSubmit, initialFilters }) => {
               <Field 
                 name="location" 
                 type="text" 
-                placeholder="Kyiv, Ukraine" 
+                placeholder="Ukraine, Kyiv" 
                 className={css.input}
               />
             </div>

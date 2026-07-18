@@ -3,6 +3,7 @@ import { fetchCampers, fetchCamperById } from "./campersOps";
 
 const initialState = {
   items: [],
+  page: 1,
   currentCamp: null,
   isLoading: false,
   error: null,
@@ -22,17 +23,37 @@ const handleRejected = (state, action) => {
 const campersSlice = createSlice({
   name: "campers",
   initialState,
+  reducers: {
+    // Інкремент сторінки для Load More
+    changePage: (state) => {
+      state.page += 1;
+    },
+    // Скидання даних перед новим пошуком/фільтрацією
+    resetCampers: (state) => {
+      state.items = [];
+      state.page = 1;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      // Фетч усіх кемперів (Каталог)
+      // Каталог оголошень - Фетч усіх кемперів (Каталог з пагінацією)
       .addCase(fetchCampers.pending, handlePending)
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload;
+
+        const newCampers = action.payload?.items || [];
+
+        // Фільтруємо нові картки: додаємо лише ті, id яких ще НЕМАЄ в стейті
+        const uniqueCampers = newCampers.filter(
+          (newCamper) =>
+            !state.items.some((existing) => existing.id === newCamper.id),
+        );
+
+        state.items.push(...uniqueCampers);
       })
       .addCase(fetchCampers.rejected, handleRejected)
 
-      // Фетч одного кемпера (Деталі)
+      // Деталі одного кемпера
       .addCase(fetchCamperById.pending, handlePending)
       .addCase(fetchCamperById.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -42,8 +63,11 @@ const campersSlice = createSlice({
   },
 });
 
-// Базові селектори
+// Експорт екшенів з reducers
+export const { changePage, resetCampers } = campersSlice.actions;
+
 export const selectCampers = (state) => state.campers.items;
+export const selectPage = (state) => state.campers.page;
 export const selectCamperDetails = (state) => state.campers.currentCamp;
 export const selectIsLoading = (state) => state.campers.isLoading;
 export const selectError = (state) => state.campers.error;

@@ -1,7 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCampers } from '../../redux/campersOps';
-import { selectCampers, selectIsLoading, selectError } from '../../redux/campersSliсe';
+import { 
+  selectCampers, 
+  selectIsLoading, 
+  selectError, 
+  selectPage, 
+  changePage, 
+  resetCampers 
+} from '../../redux/campersSlice';
+import { selectActiveFilters, changeFilters } from '../../redux/filtersSlice';
 
 import SidebarFilter from '../../components/catalog/SidebarFilter/SidebarFilter';
 import CamperList from '../../components/catalog/CamperList/CamperList';
@@ -11,18 +19,32 @@ import css from './CatalogPage.module.css';
 const CatalogPage = () => {
   const dispatch = useDispatch();
 
-  // 1. Використовуємо готові селектори з твого campersSlice
+  // Читання стану з обох слайсів
   const campers = useSelector(selectCampers);
+  const page = useSelector(selectPage);
+  const filters = useSelector(selectActiveFilters);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
-  // 2. Завантажуємо дані при монтуванні сторінки
-  useEffect(() => {
-    dispatch(fetchCampers());
-  }, [dispatch]);
+  
+  const filtersString = JSON.stringify(filters);
 
-  const handleFilterSubmit = (filters) => {
-    console.log('Filters submitted:', filters);
+useEffect(() => {
+  // Розпаковуємо рядок назад в об'єкт
+  const activeFilters = JSON.parse(filtersString);   
+  dispatch(fetchCampers({ filters: activeFilters, page }));
+}, [dispatch, page, filtersString]); // Тепер тут повна гармонія
+  
+
+  // Сабміт форми фільтрів
+  const handleFilterSubmit = (newFilters) => {
+    dispatch(resetCampers());          // 1. Скидаємо масив кемперів та повертаємо page на 1
+    dispatch(changeFilters(newFilters)); // 2. Оновлюємо фільтри в сторі (це тригерить useEffect)
+  };
+
+  // Клікі на кнопку Load More
+  const handleLoadMore = () => {
+    dispatch(changePage()); // Інкрементує сторінку (це тригерить useEffect)
   };
 
   return (
@@ -31,33 +53,33 @@ const CatalogPage = () => {
 
       <div className={css.catalogContent}>
         
-        {/* ТИМЧАСОВА ПЕРЕВІРКА REDUX СТАНУ */}
-        <div style={{ background: '#f4f4f4', padding: '10px', marginBottom: '20px', borderRadius: '5px' }}>
-          <h3>Redux Status:</h3>
-          <p>Campers in store: {campers.length}</p>
-          <p>Loading: {isLoading ? '✅ Yes' : '❌ No'}</p>
-          {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-        </div>
-
-        {/* СТАН 1: Завантаження */}
-        {isLoading && (
+        {/* СТАН 1: Завантаження першої сторінки або довантаження */}
+        {isLoading && campers.length === 0 && (
           <div className={css.loaderBackdrop}>
             <div className={css.loaderCard}>
               <div className={css.spinner}></div>
               <h2>Loading tracks...</h2>
-              <p>Please wait while we fetch the best travel trucks for you</p>
             </div>
           </div>
         )}
 
-        {/* СТАН 2: Помилка або порожній список */}
+        {/* СТАН 2: Порожній результат пошуку */}
         {!isLoading && !error && campers.length === 0 && (
           <EmptyState />
         )}
 
         {/* СТАН 3: Рендер списку кемперів */}
-        {!isLoading && !error && campers.length > 0 && (
-          <CamperList campers={campers} />
+        {!error && campers.length > 0 && (
+          <>
+            <CamperList campers={campers} />
+            
+            {/* Показуємо кнопку Load More лише якщо не йде завантаження */}
+            {!isLoading && (
+              <button type="button" className={css.loadMoreBtn} onClick={handleLoadMore}>
+                Load more
+              </button>
+            )}
+          </>
         )}
         
       </div>

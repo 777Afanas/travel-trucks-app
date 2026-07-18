@@ -6,17 +6,33 @@ const campersApi = axios.create({
   baseURL: "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io",
 });
 
-// Запит для отримання оголошень (фільтрація / пагінація)
 export const fetchCampers = createAsyncThunk(
   "campers/fetchAll",
-  async (filters = {}, thunkAPI) => {
+  async ({ filters, page }, thunkAPI) => {
     try {
-      // об'єкт фільтрів => params (Axios веретворить на ?location=Kyiv тощо)
-      const response = await campersApi.get("/campers", { params: filters });
-      // Мок-пагінація віддає об'єкт { items: [...] }, повертаємо response.data.items
-      return response.data.items;
+      const activeParams = {};
+
+      if (filters) {
+        Object.keys(filters).forEach((key) => {
+          const value = filters[key];
+          // Залишаємо лише непусті рядки та true прапорці
+          if (
+            (typeof value === "string" && value.trim() !== "") ||
+            value === true
+          ) {
+            activeParams[key] = value;
+          }
+        });
+      }
+
+      const response = await campersApi.get("/campers", {
+        params: { ...activeParams, page, limit: 4 },
+      });
+
+      return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      // Ідеально для відлову 404 від MockAPI без крашу Redux-стейту
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   },
 );
