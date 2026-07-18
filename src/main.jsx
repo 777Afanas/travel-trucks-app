@@ -27,3 +27,7 @@ createRoot(document.getElementById("root")).render(
     </Provider>    
   </StrictMode>,
 );
+
+import { fetchCampers, fetchCamperById } from "./redux/campersOps";
+store.dispatch(fetchCampers());
+store.dispatch(fetchCamperById("1"));
