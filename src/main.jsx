@@ -11,6 +11,9 @@ import { Toaster } from "react-hot-toast";
 // 3. Локальні модулі (компоненти, сховище)
 import { store } from "./redux/store";
 import App from "./App"; 
+// ТИМЧАСОВО ДЛЯ ТЕСТУ КОНСОЛІ:
+import "./redux/campersOps";
+
 // 4. Глобальні стилі 
 import "./index.css";
 

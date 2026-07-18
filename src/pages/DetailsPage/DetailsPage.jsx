@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCamperById } from '../../redux/ops'; // Ваш асинхронний запит з Axios
-import { selectCamperDetails, selectIsLoading } from '../../redux/sliсe';
+import { fetchCamperById } from '../../redux/campersOps'; // Ваш асинхронний запит з Axios
+import { selectCamperDetails, selectIsLoading } from '../../redux/campersSliсe';
 
 import CamperInfo from '../../components/details/CamperInfo/CamperInfo';
 import CamperGallery from '../../components/details/CamperGallery/CamperGallery';
