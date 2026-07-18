@@ -1,70 +1,45 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCampers } from '../../redux/campersOps';
+import { selectCampers, selectIsLoading, selectError } from '../../redux/campersSliсe';
+
 import SidebarFilter from '../../components/catalog/SidebarFilter/SidebarFilter';
 import CamperList from '../../components/catalog/CamperList/CamperList';
 import EmptyState from '../../components/shared/EmptyState/EmptyState';
 import css from './CatalogPage.module.css';
 
-// Головний масив для фільтрації на стороні "псевдо-бекенду"
-const ALL_MOCK_CAMPERS = [
-  { id: "1", name: "Mavericks", price: 8000, rating: 4.4, reviewsCount: 2, location: "Kyiv, Ukraine", image: "https://ftp.goit.study/img/campers-ca-posts/1-1.jpg", description: "Embrace simplicity and freedom...", engine: "Petrol", transmission: "Automatic", form: "Alcove" },
-  { id: "2", name: "Kuga Camper", price: 9000, rating: 4.2, reviewsCount: 10, location: "Lviv, Ukraine", image: "https://ftp.goit.study/img/campers-ca-posts/2-1.jpg", description: "Enjoy your road trip with this perfect camper!", engine: "Petrol", transmission: "Automatic", form: "Alcove" },
-  { id: "3", name: "Roadie", price: 7500, rating: 4.8, reviewsCount: 5, location: "Odesa, Ukraine", image: "https://ftp.goit.study/img/campers-ca-posts/3-1.jpg", description: "Compact and easy to drive...", engine: "Diesel", transmission: "Manual", form: "Van" },
-  { id: "4", name: "Crusader", price: 12000, rating: 4.9, reviewsCount: 14, location: "Kyiv, Ukraine", image: "https://ftp.goit.study/img/campers-ca-posts/4-1.jpg", description: "Luxury on wheels for the whole family...", engine: "Diesel", transmission: "Automatic", form: "Fully Integrated" },
-  { id: "5", name: "Seeker", price: 6800, rating: 4.0, reviewsCount: 3, location: "Kharkiv, Ukraine", image: "https://ftp.goit.study/img/campers-ca-posts/5-1.jpg", description: "Budget friendly option for weekend getaways...", engine: "Petrol", transmission: "Manual", form: "PanelTruck" },
-  { id: "6", name: "Trailblazer", price: 10500, rating: 4.6, reviewsCount: 8, location: "Dnipro, Ukraine", image: "https://ftp.goit.study/img/campers-ca-posts/6-1.jpg", description: "Built for off-road adventures...", engine: "Diesel", transmission: "Automatic", form: "Alcove" }
-];
-
 const CatalogPage = () => {
-  // Початковий стейт порожній — сигнал для CamperList увімкнути дефолтні моки
-  // const [campers, setCampers] = useStat([]);   
-  const [campers, setCampers] = useState(ALL_MOCK_CAMPERS);   
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  // Логіка фільтрації (імітація запиту до сервера)
+  // 1. Використовуємо готові селектори з твого campersSlice
+  const campers = useSelector(selectCampers);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  // 2. Завантажуємо дані при монтуванні сторінки
+  useEffect(() => {
+    dispatch(fetchCampers());
+  }, [dispatch]);
+
   const handleFilterSubmit = (filters) => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      const filtered = ALL_MOCK_CAMPERS.filter((camper) => {
-        // 1. Фільтр по локації
-        if (filters.location && !camper.location.toLowerCase().includes(filters.location.toLowerCase())) {
-          return false;
-        }
-        // 2. Фільтр по типу двигуна
-        if (filters.engine && camper.engine !== filters.engine) {
-          return false;
-        }
-        // 3. Фільтр по трансмісії
-        if (filters.transmission && camper.transmission !== filters.transmission) {
-          return false;
-        }
-        // 4. Фільтр по формі кузова (з урахуванням Panel Van -> PanelTruck)
-        if (filters.camperForm) {
-          const formData = camper.form.toLowerCase();
-          const formFilter = filters.camperForm.toLowerCase();
-          if (!formData.includes(formFilter) && !(formFilter === 'panel van' && formData === 'paneltruck')) {
-            return false;
-          }
-        }
-        return true;
-      });
-
-      // Якщо нічого не знайдено — записуємо null, інакше — знайдені елементи
-      setCampers(filtered.length > 0 ? filtered : null);
-      setIsLoading(false);
-    }, 1000);
+    console.log('Filters submitted:', filters);
   };
 
   return (
     <main className={css.catalogContainer}>
-      
-      {/* Бокова панель з фільтрами */}
       <SidebarFilter onFilterSubmit={handleFilterSubmit} />
 
-      {/* Основний контент сторінки */}
       <div className={css.catalogContent}>
         
-        {/* СТАН 1: Завантаження (Бекдроп поверх контенту) */}
+        {/* ТИМЧАСОВА ПЕРЕВІРКА REDUX СТАНУ */}
+        <div style={{ background: '#f4f4f4', padding: '10px', marginBottom: '20px', borderRadius: '5px' }}>
+          <h3>Redux Status:</h3>
+          <p>Campers in store: {campers.length}</p>
+          <p>Loading: {isLoading ? '✅ Yes' : '❌ No'}</p>
+          {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+        </div>
+
+        {/* СТАН 1: Завантаження */}
         {isLoading && (
           <div className={css.loaderBackdrop}>
             <div className={css.loaderCard}>
@@ -75,22 +50,15 @@ const CatalogPage = () => {
           </div>
         )}
 
-        {/* СТАН 2: Порожній результат фільтрації */}
-        {!isLoading && campers === null && (
+        {/* СТАН 2: Помилка або порожній список */}
+        {!isLoading && !error && campers.length === 0 && (
           <EmptyState />
         )}
 
-        {/* СТАН 3: Успішно завантажені або дефолтні дані */}
-        {/* {!isLoading && campers !== null && (
-          <CamperList campers={campers.length > 0 ? campers : null} />
-        )} */}
-        {!isLoading && campers !== null && (
-  <CamperList key={campers.length} campers={campers} />
-)}
-
-        {/* {!isLoading && campers && campers.length > 0 && (
-  <CamperList key={campers.length} campers={campers} />
-)} */}
+        {/* СТАН 3: Рендер списку кемперів */}
+        {!isLoading && !error && campers.length > 0 && (
+          <CamperList campers={campers} />
+        )}
         
       </div>
     </main>
