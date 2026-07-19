@@ -13,6 +13,7 @@ import { store } from "./redux/store";
 import App from "./App"; 
 
 // 4. Глобальні стилі 
+import "modern-normalize";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(

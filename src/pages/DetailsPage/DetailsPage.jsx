@@ -27,7 +27,7 @@ const DetailPage = () => {
   if (!camper) return null;
 
   return (
-    <div className={css.container}>
+    <div className={`container ${css.container}`}>
       {/* ВЕРХНІЙ ЯРУС: Галерея + Інфо та Деталі машини */}
       <div className={css.topSection}>
         <div className={css.galleryColumn}>

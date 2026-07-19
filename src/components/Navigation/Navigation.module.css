@@ -1,34 +1,39 @@
-
 .nav {
     display: flex;
-    gap: 15px;
-    /* Трохи збільшив відступ між кнопками для кращого вигляду */
-    padding: 16px 20px;
-    /* Внутрішні відступи: шапка сайту тепер має простір навколо */
-    background-color: #fff;
-    /* Білий фон для шапки */
+    align-items: center;
 }
 
+.navList {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navItem {
+    margin: 0;
+    padding: 0;
+}
+
+/* Стандартне НЕАКТИВНЕ посилання (тепер глибоке чорне) */
 .link {
     text-decoration: none;
-    color: black;
+    color: #101828;
+    /* Колір Main із Figma UI Kit */
+    font-size: 16px;
     font-weight: 500;
-    /* Додав напівжирний напівоб'єм, щоб текст виглядав чіткіше */
     transition: color 0.2s ease-in-out;
-    /* Плавна зміна кольору при наведенні */
 }
 
+/* При ховері робимо плавне освітлення до сірого */
 .link:hover {
-    text-decoration: underline;
-    color: rgb(255, 0, 25);
-    /* При наведенні мишкою лінк підсвічується червоним */
+    color: #6C717B;
 }
 
-/* Якщо ти використовуєш clsx і css.isActive, то назва класу має збігатися */
+/* АКТИВНИЙ стан сторінки (тепер приглушений сіро-зелений) */
 .active {
-    color: rgb(255, 0, 25);
-    text-decoration: underline;
-    /* Додав підкреслення для активного стану */
-    font-weight: 700;
-    /* Робимо активне посилання жирнішим */
+    color: #6C717B;
+    /* Колір Grey-green із Figma UI Kit */
+    font-weight: 500;
 }

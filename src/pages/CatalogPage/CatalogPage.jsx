@@ -63,7 +63,7 @@ const CatalogPage = () => {
   };
 
   return (
-    <main className={css.catalogContainer}>
+    <main className={`container ${css.catalogContainer}`}>
       <SidebarFilter
         onFilterSubmit={handleFilterSubmit}
         onReset={handleGlobalReset}

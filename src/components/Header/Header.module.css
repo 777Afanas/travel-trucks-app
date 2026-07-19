@@ -1,3 +1,29 @@
-.section {     
-    padding: 20px 0;
+.header_container {
+    height: 72px;
+    padding: 24px 0;
+    display: flex;
+    justify-content: flex-start;
+    /* Вирівнюємо елементи один за одним від лівого краю */
+    align-items: center;
+}
+
+/* СТИЛІ ДЛЯ ЛОГОТИПУ */
+.logo {
+    font-size: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: inline-flex;
+    margin-left: 64px;
+    /* Лівий безпечний відступ від краю за макетом */
+    margin-right: 450px;
+    /* Фіксований відступ до меню Home/Catalog з Figma */
+}
+
+.logo span:first-child {
+    color: #101828;
+}
+
+.logo span:last-child {
+    color: #475467;
 }

@@ -1,6 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;500&display=swap');
+
+:root {
+  /* Палітра кольорів з UI Kit */
+  --color-button-hover: #6D7B75;
+  --color-button: #829B91;
+  --color-bg-light: #F2F4F7;
+  --color-inputs: #F7F7F7;
+  --color-rating-stars: #FFC531;
+  --color-main-text: #6C717B;
+  --color-white: #FFFFFF;
+  --color-icons-dark: #475467;
+  --color-header-dark: #101828;
+  --color-border: #DADDE1;
+
+  /* Додаткові специфічні кольори з макету фільтрів */
+  --color-error: #E44848;
+  /* Червоний колір для валідації та помилок форми */
+}
+
+/* ==========================================================================
+   ГЛОБАЛЬНЕ СКИДАННЯ ТА БАЗОВІ СТИЛІ (RESET & BASE)
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+/* Глобальні налаштування сторінки */
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   font-size: 16px;
-  background-color: #fcfcfc;   
-  color: #111111;
+  background-color: #fcfcfc;
+  color: var(--color-header-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   ГОТОВІ КЛАСИ ДЛЯ КОМПОНЕНТІВ (UI KIT)
+   ========================================================================== */
+
+/* Шрифтовий клас */
+.font-manrope {
+  font-family: 'Manrope', sans-serif;
+}
+
+/* 1. Головні кнопки сайту ("View Now", "Search") */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-button);
+  color: var(--color-white);
+  padding: 16px 60px;
+  border-radius: 200px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-button-hover);
+}
+
+/* 2. Другорядні кнопки ("Load more", "Clear filters") */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--color-header-dark);
+  padding: 16px 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 200px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-main-text);
+  background-color: var(--color-inputs);
+}
+
+/* 3. Текстові інпути (Поля "Name", "Location" з іконками) */
+.input-field {
+  width: 100%;
+  padding: 18px 18px 18px 44px;
+  /* Лівий паддінг більший для іконки локації */
+  background-color: var(--color-inputs);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--color-header-dark);
+  outline: none;
+  transition: background-color 0.2s ease;
+}
+
+.input-field:focus {
+  background-color: var(--color-bg-light);
+}
+
+/* Стан помилки для інпутів (як у блоці Name*) */
+.input-field.error {
+  border: 1px solid var(--color-error);
+  background-color: #FFF5F5;
+}
+
+/* 4. Бейджі категорій та фільтрів ("Petrol", "Automatic") */
+.badge-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background-color: var(--color-inputs);
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-header-dark);
+}
+
+/* ==========================================================================
+   ОСНОВНИЙ КОНТЕЙНЕР ДЛЯ ВИРІВНЮВАННЯ КОНТЕНТУ
+   ========================================================================== */
+
+.container {
+  max-width: 1440px;
+  padding: 0 64px;
+  margin: 0 auto;
 }
