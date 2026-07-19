@@ -1,13 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '../../shared/Button/Button';
 
 const CamperCard = ({ camper }) => {
-  const location = useLocation();
-
-  // Безпечно витягуємо зображення: шукаємо в gallery об'єкт або рядок, або падаємо на camper.image
+  
+  // витягуємо зображення: шукаємо в gallery об'єкт/рядок, або падаємо на camper.image
   const camperImage = camper.gallery?.[0]?.thumb || camper.gallery?.[0]?.original || camper.gallery?.[0] || camper.image;
 
-  // Безпечно рахуємо кількість відгуків (якщо сервер повертає масив reviews замість reviewsCount)
+  // рахуємо кількість відгуків (якщо сервер повертає масив reviews замість reviewsCount)
   const reviewsCount = camper.reviewsCount ?? camper.reviews?.length ?? 0;
 
   return (
@@ -17,11 +16,15 @@ const CamperCard = ({ camper }) => {
       <div className="camper-info">
         <div className="card-header">
           <h3>{camper.name}</h3>
-          <span className="price">€{camper.price}</span>
+          <span className="price">
+            €{Number(camper.price).toFixed(2).replace(".", ",")}
+          </span>
         </div>
 
         <div className="card-meta">
-          <span>★ {camper.rating || 0} ({reviewsCount} Reviews)</span>
+          <span>
+            ★ {camper.rating || 0} ({reviewsCount} Reviews)
+          </span>
           <span>{camper.location}</span>
         </div>
 
@@ -34,16 +37,13 @@ const CamperCard = ({ camper }) => {
         </div>
 
         {/* Декларативний лінк для відкриття детальної сторінки в новій вкладці */}
-        <Link 
-          to={`/catalog/${camper.id}`} 
-          state={location} 
-          target="_blank" 
+        <Link
+          to={`/catalog/${camper.id}`}           
+          target="_blank"
           rel="noopener noreferrer"
-          style={{ textDecoration: 'none', display: 'inline-block' }}
+          style={{ textDecoration: "none", display: "inline-block" }}
         >
-          <Button variant="primary">
-            Show more
-          </Button>
+          <Button variant="primary">Show more</Button>
         </Link>
       </div>
     </div>

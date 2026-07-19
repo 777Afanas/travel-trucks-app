@@ -1,19 +1,9 @@
-import { useSearchParams } from 'react-router-dom';
 import Button from '../Button/Button';
 import css from './EmptyState.module.css';
-// import camperIllustration from '../../assets/camper-placeholder.svg'; // картинка з макету
 
-const EmptyState = () => {
-  const [, setSearchParams] = useSearchParams();
-
-  const handleReset = () => {
-    setSearchParams({}); // Очищає URL-параметри, повертаючи на чистий /catalog
-  };
-
+const EmptyState = ({ onReset }) => {
   return (
     <div className={css.emptyStateContainer}>
-      {/* <img src={camperIllustration} alt="No campers found" className={css.image} /> */}
-      
       <h2 className={css.title}>No campers found</h2>
       <p className={css.text}>
         We couldn’t find any campers that match your filters. <br />
@@ -21,13 +11,13 @@ const EmptyState = () => {
       </p>
 
       <div className={css.actions}>
-        {/* Кнопка з хрестиком (модифікатор secondary) */}
-        <Button variant="secondary" onClick={handleReset}>
+        {/* Кнопка Clear filters викликає централізоване скидання */}
+        <Button variant="secondary" onClick={onReset}>
           ✕ Clear filters
         </Button>
         
-        {/* Кнопка залита (модифікатор primary) */}
-        <Button variant="primary" onClick={handleReset}>
+        {/* Кнопка View all campers робить те саме через той самий проп */}
+        <Button variant="primary" onClick={onReset}>
           View all campers
         </Button>
       </div>
@@ -35,6 +25,5 @@ const EmptyState = () => {
   );
 };
 
-export default EmptyState;
-
+export default EmptyState; 
 

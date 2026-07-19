@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { fetchCampers, fetchCamperById } from "./campersOps";
 
 const initialState = {
@@ -41,9 +41,10 @@ const campersSlice = createSlice({
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        const newCampers = action.payload?.items || [];
+        // const newCampers = action.payload?.items || [];
+        const newCampers = action.payload?.items || action.payload || []; // обробка різних форматів відповіді MockAPI
 
-        // Фільтруємо нові картки: додаємо лише ті, id яких ще НЕМАЄ в стейті
+        // Фільтруємо нові картки: додаємо ті, id яких ще НЕМАЄ в стейті
         const uniqueCampers = newCampers.filter(
           (newCamper) =>
             !state.items.some((existing) => existing.id === newCamper.id),
@@ -66,10 +67,49 @@ const campersSlice = createSlice({
 // Експорт екшенів з reducers
 export const { changePage, resetCampers } = campersSlice.actions;
 
+// Базові селектори
 export const selectCampers = (state) => state.campers.items;
 export const selectPage = (state) => state.campers.page;
-export const selectCamperDetails = (state) => state.campers.currentCamp;
 export const selectIsLoading = (state) => state.campers.isLoading;
 export const selectError = (state) => state.campers.error;
+export const selectCamperDetails = (state) => state.campers.currentCamp;
+
+// Мемоізований селектор для клієнтської фільтрації (Захист від 404)
+export const selectFilteredCampers = createSelector(
+  [selectCampers, (state) => state.filters],
+  (items, filters) => {
+    return items.filter((camper) => {
+      // 1. Фільтр: Локація
+      if (
+        filters.location &&
+        !camper.location.toLowerCase().includes(filters.location.toLowerCase())
+      ) {
+        return false;
+      }
+      // 2. Фільтр: Тип кузова (form)
+      if (filters.form && camper.form !== filters.form) {
+        return false;
+      }
+      // 3. Фільтр: Двигун (engine)
+      if (filters.engine && camper.engine !== filters.engine) {
+        return false;
+      }
+      // 4. Фільтр: Трансмісія (transmission)
+      if (
+        filters.transmission &&
+        camper.transmission !== filters.transmission
+      ) {
+        return false;
+      }
+      // 5. Мультивибір: Обладнання (Equipment)
+      if (filters.AC && camper.AC !== true) return false;
+      if (filters.kitchen && camper.kitchen !== true) return false;
+      if (filters.TV && camper.TV !== true) return false;
+      if (filters.bathroom && camper.bathroom !== true) return false;
+
+      return true;
+    });
+  },
+);
 
 export default campersSlice.reducer;

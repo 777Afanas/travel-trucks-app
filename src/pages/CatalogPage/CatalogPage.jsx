@@ -1,59 +1,76 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCampers } from '../../redux/campersOps';
-import { 
-  selectCampers, 
-  selectIsLoading, 
-  selectError, 
-  selectPage, 
-  changePage, 
-  resetCampers 
-} from '../../redux/campersSlice';
-import { selectActiveFilters, changeFilters } from '../../redux/filtersSlice';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom"; // Додаємо хук для URL
+import { fetchCampers } from "../../redux/campersOps";
+import {
+  selectFilteredCampers,
+  selectIsLoading,
+  selectError,
+  selectPage,
+  changePage,
+  resetCampers,
+} from "../../redux/campersSlice";
+import { changeFilters } from "../../redux/filtersSlice";
 
-import SidebarFilter from '../../components/catalog/SidebarFilter/SidebarFilter';
-import CamperList from '../../components/catalog/CamperList/CamperList';
-import EmptyState from '../../components/shared/EmptyState/EmptyState';
-import css from './CatalogPage.module.css';
+import SidebarFilter from "../../components/catalog/SidebarFilter/SidebarFilter";
+import CamperList from "../../components/catalog/CamperList/CamperList";
+import EmptyState from "../../components/shared/EmptyState/EmptyState";
+import css from "./CatalogPage.module.css";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
+  const [, setSearchParams] = useSearchParams(); // Керування URL параметрами
 
-  // Читання стану з обох слайсів
-  const campers = useSelector(selectCampers);
+  const campers = useSelector(selectFilteredCampers);
   const page = useSelector(selectPage);
-  const filters = useSelector(selectActiveFilters);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
-  
-  const filtersString = JSON.stringify(filters);
+  useEffect(() => {
+    dispatch(fetchCampers({ page }));
+  }, [dispatch, page]);
 
-useEffect(() => {
-  // Розпаковуємо рядок назад в об'єкт
-  const activeFilters = JSON.parse(filtersString);   
-  dispatch(fetchCampers({ filters: activeFilters, page }));
-}, [dispatch, page, filtersString]); // Тепер тут повна гармонія
-  
-
-  // Сабміт форми фільтрів
   const handleFilterSubmit = (newFilters) => {
-    dispatch(resetCampers());          // 1. Скидаємо масив кемперів та повертаємо page на 1
-    dispatch(changeFilters(newFilters)); // 2. Оновлюємо фільтри в сторі (це тригерить useEffect)
+    dispatch(changeFilters(newFilters));
   };
 
-  // Клікі на кнопку Load More
   const handleLoadMore = () => {
-    dispatch(changePage()); // Інкрементує сторінку (це тригерить useEffect)
+    dispatch(changePage());
+  };
+
+  // Метод централізованого глобального скидання: чистить URL, форму через Redux та пагінацію
+  const handleGlobalReset = () => {
+    setSearchParams({}); // 1. Видаляє Query-параметри, повертаючи чистий /catalog
+
+    dispatch(
+      changeFilters({
+        // 2. Обнуляє стейт фільтрів (Formik підхопить це завдяки enableReinitialize)
+        location: "",
+        form: "",
+        engine: "",
+        transmission: "",
+        AC: false,
+        kitchen: false,
+        TV: false,
+        bathroom: false,
+      }),
+    );
+
+    dispatch(resetCampers()); // 3. Повертає page: 1 та чистить items для свіжого фетчу
+
+    //  примусово викликаємо фетч першої сторінки для заповнення стейту
+    dispatch(fetchCampers({ page: 1 }));
   };
 
   return (
     <main className={css.catalogContainer}>
-      <SidebarFilter onFilterSubmit={handleFilterSubmit} />
+      <SidebarFilter
+        onFilterSubmit={handleFilterSubmit}
+        onReset={handleGlobalReset}
+      />
 
       <div className={css.catalogContent}>
-        
-        {/* СТАН 1: Завантаження першої сторінки або довантаження */}
+        {/* СТАН 1: Завантаження */}
         {isLoading && campers.length === 0 && (
           <div className={css.loaderBackdrop}>
             <div className={css.loaderCard}>
@@ -63,25 +80,26 @@ useEffect(() => {
           </div>
         )}
 
-        {/* СТАН 2: Порожній результат пошуку */}
+        {/* СТАН 2: Порожній результат — Передаємо наш handleGlobalReset */}
         {!isLoading && !error && campers.length === 0 && (
-          <EmptyState />
+          <EmptyState onReset={handleGlobalReset} />
         )}
 
-        {/* СТАН 3: Рендер списку кемперів */}
+        {/* СТАН 3: Рендер списку */}
         {!error && campers.length > 0 && (
           <>
             <CamperList campers={campers} />
-            
-            {/* Показуємо кнопку Load More лише якщо не йде завантаження */}
             {!isLoading && (
-              <button type="button" className={css.loadMoreBtn} onClick={handleLoadMore}>
+              <button
+                type="button"
+                className={css.loadMoreBtn}
+                onClick={handleLoadMore}
+              >
                 Load more
               </button>
             )}
           </>
         )}
-        
       </div>
     </main>
   );
