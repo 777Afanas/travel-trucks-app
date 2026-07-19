@@ -1,19 +1,17 @@
-
-import { useState } from 'react'; 
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 import css from './BookForm.module.css';
 
 const BookForm = ({ camperId }) => {
   const [formData, setFormData] = useState({ name: '', email: '', date: '', comment: '' });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Тут логіка відправки запиту через Axios за потреби
-    alert("Booking camper with ID:", camperId);
+    toast.success('Booking successful! We will contact you soon.');
     setFormData({ name: '', email: '', date: '', comment: '' });
   };
 
@@ -32,6 +30,5 @@ const BookForm = ({ camperId }) => {
     </div>
   );
 };
-
 
 export default BookForm;

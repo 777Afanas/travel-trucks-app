@@ -1,0 +1,51 @@
+/* Загальний контейнер */
+.galleryWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Контейнер для головного фото */
+.mainImageContainer {
+    width: 100%;
+    height: 432px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.mainImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Динамічна сітка для мініатюр */
+.thumbnailsList {
+    display: grid;
+    /* Автоматично ділить простір на однакові колонки залежно від кількості елементів */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+/* Стилі для мініатюр */
+.thumbnailImg {
+    width: 100%;
+    /* Тепер ширина адаптується під колонку Grid */
+    height: 96px;
+    /* Висота залишається фіксованою за макетом */
+    border-radius: 12px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: opacity 0.2s ease, border-color 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.thumbnailImg:hover {
+    opacity: 0.8;
+}
+
+.thumbnailImg.active {
+    border-color: #475467;
+}

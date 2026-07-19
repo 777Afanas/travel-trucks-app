@@ -2,31 +2,78 @@
     max-width: 1440px;
     margin: 0 auto;
     padding: 40px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    /* Відступ між верхнім блоком та секцією відгуків */
 }
 
-/* Головна сітка сайту */
-.pageLayout {
+/* Стилі для верхнього ярусу */
+.topSection {
     display: flex;
     gap: 64px;
-    /* Відступ між лівою та правою частинами */
+    align-items: stretch;
+    /* Змушує ліву і праву частини бути однакової висоти */
+}
+
+.galleryColumn {
+    flex: 1;
+}
+
+.infoColumn {
+    width: 448px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* Відступ між CamperInfo та VehicleDetails */
+}
+
+/* Стилі для нижнього ярусу */
+.bottomSection {
+    display: flex;
+    gap: 64px;
     align-items: flex-start;
 }
 
-/* Ліва колонка займає весь доступний простір */
+.reviewsColumn {
+    flex: 1;
+}
+
+.formColumn {
+    width: 448px;
+    flex-shrink: 0;
+}
+
+
+/* .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 64px;
+}
+
+
+.pageLayout {
+    display: flex;
+    gap: 64px;
+    
+    align-items: flex-start;
+}
+
+
 .leftColumn {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 44px;
-    /* Відступ між Галереєю та Відгуками */
 }
 
-/* Права колонка має фіксовану ширину кузова форми та карток */
+
 .rightColumn {
     width: 448px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 24px;
-    /* Відступ між інфо, деталями та формою бронювання */
 }
+ */

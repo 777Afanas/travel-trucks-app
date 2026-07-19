@@ -1,0 +1,80 @@
+/* Головний контейнер всього блоку деталей */
+.detailsContainer {
+    background-color: #f9f9f9;
+    border-radius: 24px;
+    padding: 24px;
+    width: 100%;
+}
+
+/* Заголовок Vehicle details */
+.sectionTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #101828;
+    margin-bottom: 24px;
+    margin-top: 0;
+}
+
+/* Контейнер для плашок (бейджів) */
+.tagsContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    /* Стріктно в один ряд, без переносів */
+    gap: 4px;
+    /* Зменшено відступ між плашками для компактності */
+    margin-bottom: 24px;
+}
+
+/* Стиль окремої плашки (категорії) */
+.tag {
+    background-color: #f2f4f7;
+    color: #101828;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 14px;
+    /* Оптимальні відступи, щоб усі 6 плашок помістилися в ряд */
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    /* Забороняє тексту всередині плашки розриватися */
+}
+
+/* Тонка лінія розмежування */
+.divider {
+    border: none;
+    border-top: 1px solid #eaecf0;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+/* Таблиця характеристик */
+.specsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Рядок таблиці, що розносить елементи по боках */
+.tableRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+/* Статичний напис колонки (ліворуч) */
+.specLabel {
+    font-size: 16px;
+    font-weight: 500;
+    color: #475467;
+    /* Приглушений сірий колір згідно з макетом */
+}
+
+/* Значення характеристики з бекенду (праворуч) */
+.specValue {
+    font-size: 16px;
+    font-weight: 500;
+    color: #101828;
+    /* Контрастний темний колір для тексту значень */
+    text-align: right;
+}

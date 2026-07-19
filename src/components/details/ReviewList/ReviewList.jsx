@@ -7,19 +7,12 @@ const ReviewList = ({ reviews }) => {
     <div className={css.reviewsWrapper}>
       <h3 className={css.title}>Reviews</h3>
       <div className={css.list}>
-        {reviews.map((review) => {
+        {reviews.map((review, index) => {
           const initial = review.reviewer_name
             ? review.reviewer_name[0].toUpperCase()
             : "U";
           return (
-            <div
-              key={review.id || review.reviewer_name}
-              className={css.cardContainer}
-            >
-              {/* {reviews.map((review, index) => {
-          const initial = review.reviewer_name ? review.reviewer_name[0].toUpperCase() : 'U';
-          return (
-            <div key={index} className={css.cardContainer}> */} 
+            <div key={index} className={css.cardContainer}>
               <div className={css.userHeader}>
                 <div className={css.avatar}>{initial}</div>
                 <div>
