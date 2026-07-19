@@ -1,0 +1,54 @@
+.heroSection {
+    background-image: url('./hero-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    max-width: 1440px;
+    height: 761px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Чистий текстовий контейнер 571x176 */
+.heroContainer {
+    width: 571px;
+    /* height: 176px; */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    top: 284px;
+    left: 64px;
+}
+
+.heroTitle {
+    color: #FFFFFF;
+    font-family: "Inter", sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 56px;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px 0;
+    /* Точно 16px відступу між рядками тексту */
+}
+
+.heroSubtitle {
+    color: #F7F8FA;
+    font-family: "Inter", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    margin: 0;
+    /* Чистий нуль, щоб не роздувати висоту 176px */
+}
+
+/* Окремий селектор для точного позиціонування кнопки під текстовим блоком */
+.heroBtn {
+    position: absolute;
+    top: 420px;
+    /* 284px (top контейнера) + 176px (його висота) + 40px (відступ до кнопки) = 500px */
+    left: 64px;
+}
