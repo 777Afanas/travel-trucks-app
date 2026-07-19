@@ -80,12 +80,21 @@ export const selectFilteredCampers = createSelector(
   (items, filters) => {
     return items.filter((camper) => {
       // 1. Фільтр: Локація
-      if (
-        filters.location &&
-        !camper.location.toLowerCase().includes(filters.location.toLowerCase())
-      ) {
-        return false;
+      // if (
+      //   filters.location &&
+      //   !camper.location.toLowerCase().includes(filters.location.toLowerCase())
+      // ) {
+      //   return false;
+      // }
+      if (filters.location) {
+        const camperLocation = camper.location.toLowerCase().trim();
+        const searchLocation = filters.location.toLowerCase().trim();
+
+        if (!camperLocation.includes(searchLocation)) {
+          return false;
+        }
       }
+
       // 2. Фільтр: Тип кузова (form)
       if (filters.form && camper.form !== filters.form) {
         return false;
