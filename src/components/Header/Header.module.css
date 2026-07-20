@@ -1,8 +1,6 @@
 .header {
-    width: 100%;
-    /* background-color: #F7F8FA; */
+    width: 100%;     
     background-color: #F7F7F7;
-    /* Наш не білий фон з дизайн-системи макету */
 }
 
 .header_container {

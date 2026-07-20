@@ -1,7 +1,6 @@
 .camperList {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    /* Точний відступ між картками згідно з макетом */
+    gap: 32px;    
     width: 100%;
 }

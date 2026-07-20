@@ -1,4 +1,4 @@
-/* ОНОВЛЕНО: Глобальні пропорції та відступи сторінки згідно з Figma */
+/* Глобальні пропорції та відступи сторінки згідно з Figma */
 .catalogContainer {
     display: flex;
     width: 1440px;
@@ -10,7 +10,7 @@
     box-sizing: border-box;
 }
 
-/* ОНОВЛЕНО: Права частина, куди рендериться EmptyState або картки */
+/* Права частина, куди рендериться EmptyState або картки */
 .catalogContent {
     flex-grow: 1;
     display: flex;
@@ -20,7 +20,7 @@
     /* Відступ між картками у списку чітко 40px */
 }
 
-/* ЗАЛИШЕНО ЯК БУЛО: Стилі для кнопки Load More */
+/* Стилі для кнопки Load More */
 .loadMoreBtn {
     display: block;
     margin: 40px auto 0 auto;
@@ -39,7 +39,7 @@
     border-color: #101828;
 }
 
-/* ЗАЛИШЕНО ЯК БУЛО: Оновлений Лоадер (543х296px) з фіксованим оверлеєм */
+/*   Лоадер (543х296px) з фіксованим оверлеєм */
 .loaderBackdrop {
     position: fixed;
     top: 0;

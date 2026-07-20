@@ -1,6 +1,5 @@
 .sidebar {
-    width: 360px;
-    /* Замість фіксованої висоти робимо min-height, щоб через додані чекбокси блок міг рости вниз */
+    width: 360px;    
     min-height: 840px;
     padding: 24px;
     background-color: #F7F7F7;
@@ -18,8 +17,7 @@
 }
 
 .inputWrapper {
-    width: 312px;
-    /* Точна ширина під внутрішню сітку */
+    width: 312px;   
     display: flex;
     align-items: center;
 }
@@ -158,8 +156,6 @@
 }
 
 .actionBtn {
-    width: 312px !important;
-    /* Гарантуємо чітку ширину кнопок з макета */
-    height: 56px !important;
-    /* Гарантуємо чітку висоту кнопок з макета */
+    width: 312px !important;     
+    height: 56px !important;     
 }

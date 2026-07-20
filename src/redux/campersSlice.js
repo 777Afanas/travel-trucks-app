@@ -79,13 +79,6 @@ export const selectFilteredCampers = createSelector(
   [selectCampers, (state) => state.filters],
   (items, filters) => {
     return items.filter((camper) => {
-      // 1. Фільтр: Локація
-      // if (
-      //   filters.location &&
-      //   !camper.location.toLowerCase().includes(filters.location.toLowerCase())
-      // ) {
-      //   return false;
-      // }
       if (filters.location) {
         const camperLocation = camper.location.toLowerCase().trim();
         const searchLocation = filters.location.toLowerCase().trim();

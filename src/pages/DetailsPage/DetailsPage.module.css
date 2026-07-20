@@ -76,34 +76,3 @@
 }
 
 
-/* .container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 40px 64px;
-}
-
-
-.pageLayout {
-    display: flex;
-    gap: 64px;
-    
-    align-items: flex-start;
-}
-
-
-.leftColumn {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 44px;
-}
-
-
-.rightColumn {
-    width: 448px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
- */
