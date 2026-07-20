@@ -3,9 +3,11 @@
     gap: 24px;
     padding: 24px;
     /* Внутрішній відступ з усіх боків чітко 24px */
-    border: 1px solid #dadde1;
+    border: none;
+    /* Прибираємо стару темну рамку, оскільки картка тепер виділяється за рахунок фону */
     border-radius: 20px;
-    background-color: #ffffff;
+    background-color: #F7F7F7;
+    /* ОНОВЛЕНО: Точний сірий фон картки з Figma */
     width: 840px;
     /* Точна ширина картки за макетом */
     height: 264px;
@@ -32,6 +34,8 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+        
 }
 
 .cardHeader {
@@ -42,6 +46,7 @@
 }
 
 .title {
+    font-family: 'Inter', sans-serif;
     font-size: 24px;
     font-weight: 600;
     margin: 0;
@@ -49,6 +54,7 @@
 }
 
 .price {
+    font-family: 'Inter', sans-serif;
     font-size: 24px;
     font-weight: 600;
     color: #101828;
@@ -70,12 +76,10 @@
 
 .star {
     color: #FFC107;
-    /* Точний жовтий колір бренду з Figma */
+    /* Точний жовтий колір зірочки */
     margin-right: 4px;
-    /* Невеликий відступ від цифри рейтингу */
 }
 
-/* Контейнер для іконок локації та рейтингу */
 .location {
     display: inline-flex;
     align-items: center;
@@ -88,59 +92,108 @@
     height: 16px;
     fill: none;
     stroke: #101828;
-    /* Колір ліній для карти */
 }
 
 .description {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
     font-size: 16px;
-    color: #475467;
     line-height: 1.5;
-    margin: 0 0 24px 0;
+    color: #475467;       
+    margin: 24px 0;
+    /* display: block; */
+    flex-grow: 1;
+        min-height: 24px;
+    /* Безпечне обрізання тексту трьома крапками */
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 1; 
     line-clamp: 1;
-    /* Обрізання тексту в один рядок як на макеті */
+    /* Обрізати строго після першого рядка, як на макеті */
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Стилізація бейджів-характеристик */
+
+/* Стилізація бейджів-характеристик всередині сірої картки */
 .featuresTags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 24px;
-    /* Відступ до кнопки Show more */
 }
 
-.tag {
+/* .tag {
     display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 18px;
-    background-color: #F2F4F7;
-    /* Світло-сірий фон бейджа */
-    border-radius: 100px;
-    /* Повністю закруглені кути */
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.25;
-    color: #101828;
-    text-transform: capitalize;
-}
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        background-color: #F2F4F7;
+        
+        border-radius: 100px;
+               font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1.25;
+        color: #101828;
+        
+        text-transform: capitalize;
+} */
 
-/* Стилізація іконок всередині бейджів */
-.tagIcon {
+/* .tagIcon {
     width: 20px;
     height: 20px;
     fill: none;
     stroke: #101828;
-    /* Темний колір ліній контуру іконки */
+} */
+
+/* Переконайся, що цей блок виглядає саме так */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    /* Точна відстань між іконкою та текстом */
+    padding: 12px 18px;
+    background-color: #F2F4F7;
+    /* Точний фон бейджа */
+    border-radius: 100px;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    /* Робимо текст щільнішим, як на макеті */
+    font-size: 16px;
+    line-height: 1.25;
+    color: #101828 !important;
+    /* Примусово ставимо глибокий темний колір тексту */
+    text-transform: capitalize;
 }
+
+/* Іконка всередині бейджа */
+/* .tagIcon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #101828 !important;     
+    stroke-width: 2px;    
+} */
+
+.tagIcon {
+    width: 20px;
+    height: 20px;
+
+    /* ПРИМУСОВЕ СКИДАННЯ ВНУТРІШНЬОЇ ЗАЛИВКИ */
+    /* fill: none !important; */
+
+    /* КОНТУР: Має бути чітким, тонким і кольору тексту */
+    stroke: #101828 !important;
+    stroke-width: 1.5px;
+    /* Задає ту саму елегантну товщину ліній з макета */
+}
+
 
 .showMoreLink {
     text-decoration: none;
     align-self: flex-start;
     margin-top: auto;
-    /* Штовхає посилання з кнопкою до самого низу картки, якщо контенту мало */
+    /* Штовхає кнопку вниз */
 }

@@ -1,0 +1,90 @@
+.emptyStateContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Центрування контенту по вертикалі */
+    width: 888px;
+    height: 840px;
+    background-color: #F7F7F7;
+    /* Точний колір фону картки з макета */
+    border-radius: 16px;
+    /* Точне скруглення кутів з макета */
+    padding: 24px;
+    /* Внутрішні паддінги з макета */
+    box-sizing: border-box;
+}
+
+.illustration {
+    width: 488px;
+    height: 463px;
+    object-fit: contain;
+    margin-bottom: 32px;
+}
+
+.textBlock {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.25;
+    color: #101828;
+    margin: 0 0 8px 0;
+}
+
+.text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #475467;
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    width: 400px;
+    height: 56px;
+}
+
+.btnPrimary,
+.btnSecondary {
+    width: 192px;
+    height: 56px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.btnPrimary {
+    background-color: #85968d;
+    color: #ffffff;
+    border: none;
+}
+
+.btnPrimary:hover {
+    background-color: #728279;
+}
+
+.btnSecondary {
+    background-color: #ffffff;
+    color: #101828;
+    border: 1px solid rgba(16, 24, 40, 0.2);
+}
+
+.btnSecondary:hover {
+    background-color: #f9fafb;
+}

@@ -26,6 +26,7 @@ const SidebarFilter = ({ onFilterSubmit, onReset }) => {
     { label: 'Manual', value: 'manual' }
   ];
 
+  // Масив чекбоксів згідно з вимогами ТЗ та defaultValues
   const equipments = [
     { label: 'AC', name: 'AC' },
     { label: 'Kitchen', name: 'kitchen' },
@@ -50,23 +51,16 @@ const SidebarFilter = ({ onFilterSubmit, onReset }) => {
       enableReinitialize={true}
       onSubmit={(values) => onFilterSubmit?.(values)}
     >
-      {/* ВАЖЛИВО: функція-рендер відкривається тут для доступу до resetForm */}
       {({ resetForm }) => (
         <Form className={css.sidebar}>
           {/* 1. Локація */}
           <div className={css.locationSection}>
             <label className={css.label}>Location</label>
             <div className={css.inputWrapper}>
-              {/* Іконка мапи зліва, підключена через спрайт */}
-              {/* <svg className={css.locationIcon} width="20" height="20">                
-                <use href="/assets/gemini-svg.svg#icon-location"></use>
-              </svg> */}
-              
-              {/* Компонент Field від Formik керує станом автоматично */}
               <Field 
                 name="location" 
                 type="text" 
-                placeholder="City" 
+                placeholder="Kyiv, Ukraine" 
                 className={css.input}
               />
             </div>
@@ -112,30 +106,31 @@ const SidebarFilter = ({ onFilterSubmit, onReset }) => {
               ))}
             </div>
 
-            {/* Vehicle equipment */}
+            {/* ДОДАНО ЗА ТЗ: Vehicle equipment (Чекбокси) */}
             <div className={css.filterGroup}>
               <h4 className={css.groupTitle}>Vehicle equipment</h4>
-              <div className={css.checkboxGrid}>
-                {equipments.map((item) => (
-                  <label key={item.name} className={css.optionItem}>
-                    <Field type="checkbox" name={item.name} className={css.checkbox} />
-                    <span className={css.customCheckbox}></span>
-                    {item.label}
-                  </label>
-                ))}
-              </div>
+              {equipments.map((item) => (
+                <label key={item.name} className={css.optionItem}>
+                  <Field type="checkbox" name={item.name} className={css.checkbox} />
+                  <span className={css.customCheckbox}></span>
+                  {item.label}
+                </label>
+              ))}
             </div>
           </div>
 
           {/* 3. Кнопки дій */}
           <div className={css.actions}>
-            <Button variant="primary" type="submit">Search</Button>
+            <Button variant="primary" type="submit" className={css.actionBtn}>
+              Search
+            </Button>
             <Button 
               variant="secondary" 
               type="button" 
+              className={css.actionBtn}
               onClick={() => {
-                resetForm({ values: defaultValues }); // Локальне скидання інпутів
-                onReset?.();                          // Глобальне скидання (Redux + URL)
+                resetForm({ values: defaultValues });
+                onReset?.();
               }}
             >
               ✕ Clear filters

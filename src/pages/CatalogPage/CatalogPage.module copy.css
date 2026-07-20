@@ -1,16 +1,16 @@
-/* ОНОВЛЕНО: Глобальні пропорції та відступи сторінки згідно з Figma */
+/* ОНОВЛЕНО: Точні пропорції та відступи сторінки згідно з Figma */
 .catalogContainer {
     display: flex;
-    width: 1440px;
-    margin: 0 auto;
-    padding: 120px 64px;
-    /* 120px зверху/знизу, 64px від країв сторінки */
     gap: 64px;
-    /* Відстань між SidebarFilter та контентом */
-    box-sizing: border-box;
+    /* Відступ між сайдбаром та картками */
+    max-width: 1264px;
+    /* Точна сума елементів: 360px + 64px + 840px */
+    margin: 0 auto;
+    padding: 48px 0;
+    /* Відступ зверху від хедеру чітко 48px */
 }
 
-/* ОНОВЛЕНО: Права частина, куди рендериться EmptyState або картки */
+/* ЗАЛИШЕНО ЯК БУЛО: Контейнер списку карток */
 .catalogContent {
     flex-grow: 1;
     display: flex;
@@ -22,8 +22,6 @@
 
 /* ЗАЛИШЕНО ЯК БУЛО: Стилі для кнопки Load More */
 .loadMoreBtn {
-    display: block;
-    margin: 40px auto 0 auto;
     padding: 16px 32px;
     background-color: transparent;
     border: 1px solid #e0e0e0;
@@ -39,7 +37,7 @@
     border-color: #101828;
 }
 
-/* ЗАЛИШЕНО ЯК БУЛО: Оновлений Лоадер (543х296px) з фіксованим оверлеєм */
+/* ЗАЛИШЕНО ЯК БУЛО: Оновлений Лоадер (543х296px) за новим макетом */
 .loaderBackdrop {
     position: fixed;
     top: 0;
