@@ -10,8 +10,15 @@ const CamperInfo = ({ camper }) => {
       <h1 className={css.title}>{camper.name}</h1>
       
       <div className={css.metaRow}>
-        <span className={css.rating}>★ {camper.rating} ({reviewsCount} Reviews)</span>
-        <span className={css.location}>📍 {camper.location}</span>
+        <span className={css.rating}>
+          <span className={css.star}>★</span> {camper.rating || 0} ({reviewsCount} Reviews)
+        </span>
+        <span className={css.location}>
+          <svg className={css.metaIcon}>
+            <use href="/assets/gemini-svg.svg#icon-location"></use>
+          </svg>
+          {camper.location}
+        </span>
       </div>
       
       {/* Виводимо знак валюти разом із відформатованою ціною */}

@@ -1,15 +1,17 @@
-/* Загальний контейнер */
+/* Загальний контейнер з фіксованою шириною з Figma */
 .galleryWrapper {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    width: 100%;
+    gap: 24px;
+    /* Відступ між головним фото та мініатюрами */
+    width: 638px;
+    box-sizing: border-box;
 }
 
-/* Контейнер для головного фото */
+/* Контейнер для головного фото (638px x 505px) */
 .mainImageContainer {
     width: 100%;
-    height: 432px;
+    height: 505px;
     border-radius: 20px;
     overflow: hidden;
 }
@@ -20,22 +22,23 @@
     object-fit: cover;
 }
 
-/* Динамічна сітка для мініатюр */
+/* Сітка строго під 3 фотографії */
 .thumbnailsList {
     display: grid;
-    /* Автоматично ділить простір на однакові колонки залежно від кількості елементів */
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    /* Автоматичний точний прорахунок ширини на 3 рівні частини */
     gap: 16px;
+    /* Відступ між мініатюрами */
     width: 100%;
 }
 
-/* Стилі для мініатюр */
+/* Стилі для мініатюр з фіксованою висотою 144px */
 .thumbnailImg {
     width: 100%;
-    /* Тепер ширина адаптується під колонку Grid */
-    height: 96px;
-    /* Висота залишається фіксованою за макетом */
-    border-radius: 12px;
+    height: 144px;
+    /* Висота чітко за макетом Figma */
+    border-radius: 20px;
+    /* Заокруглення як у головного фото */
     object-fit: cover;
     cursor: pointer;
     transition: opacity 0.2s ease, border-color 0.2s ease;
@@ -48,4 +51,5 @@
 
 .thumbnailImg.active {
     border-color: #475467;
+    /* Колір активної обводки */
 }

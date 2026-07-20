@@ -2,12 +2,12 @@ import { useState } from 'react';
 import css from './CamperGallery.module.css';
 
 const CamperGallery = ({ images }) => { 
-//  Безпечна ініціалізація стану після перевірки масиву
+  // Безпечна ініціалізація стану
   const [activeImage, setActiveImage] = useState(
-    images[0]?.original || images[0]?.thumb || ''
+    images?.[0]?.original || images?.[0]?.thumb || ''
   );
 
-  // Захист: якщо images немає або це не масив — одразу виходим, уникаючи крашу
+  // Захист від крашу, якщо масив порожній
   if (!images || !Array.isArray(images) || images.length === 0) return null;
   
   return (
@@ -17,14 +17,14 @@ const CamperGallery = ({ images }) => {
         <img src={activeImage} alt="Camper main view" className={css.mainImg} />
       </div>
 
-      {/* Список прев'ю (мініатюр) */}
+      {/* Список мініатюр (автоматично розрахований на 3 колонки) */}
       <div className={css.thumbnailsList}>
         {images.map((img, index) => {
           const imgSrc = img.original || img.thumb;
           return (
             <img
               key={index}
-              src={img.thumb}
+              src={img.thumb || img.original}
               alt={`Thumbnail ${index + 1}`}
               className={`${css.thumbnailImg} ${activeImage === imgSrc ? css.active : ''}`}
               onClick={() => setActiveImage(imgSrc)}
