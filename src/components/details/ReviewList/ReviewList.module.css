@@ -1,15 +1,10 @@
-.reviewsWrapper {
-    width: 100%;
-}
-
 .list {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    /* Відступ між картками відгуків */
+    width: 100%;
 }
 
-/* Сіра округла підкладка для картки */
 .cardContainer {
     background-color: #f7f7f7;
     border-radius: 24px;
@@ -17,6 +12,8 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .userHeader {
@@ -25,7 +22,6 @@
     gap: 16px;
 }
 
-/* Біле коло аватара з темною літерою */
 .avatar {
     width: 60px;
     height: 60px;
@@ -37,6 +33,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .metaInfo {
@@ -52,27 +49,26 @@
     margin: 0;
 }
 
-/* Флекс-контейнер для рівного розташування іконок */
 .starsRow {
     display: flex;
     gap: 4px;
-    /* Точний відступ між самими зірочками */
+    /* Невеличкий відступ між самими зірочками */
 }
 
-/* Базові розміри для SVG іконок */
-.starActive,
-.starInactive {
-    width: 16px;
-    height: 16px;
+/* Базовий стиль для текстової зірочки */
+.star {
+    font-size: 16px;
+    line-height: 1;
 }
 
-/* Перестраховка по кольорах: якщо SVG підтримують перевизначення через fill */
+/* Точний жовтий колір бренду з Figma */
 .starActive {
-    fill: #ffc107;
+    color: #FFC107;
 }
 
+/* Приглушений сірий для порожніх зірочок */
 .starInactive {
-    fill: #dadada;
+    color: #E8E8E8;
 }
 
 .commentText {

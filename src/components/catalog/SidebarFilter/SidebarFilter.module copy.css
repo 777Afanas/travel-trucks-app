@@ -1,0 +1,188 @@
+/* Головний контейнер сайдбару */
+.sidebar {
+    width: 360px;
+    min-height: 840px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    /* ВИПРАВЛЕНО: Сайдбар тепер прозорий і зливається з тлом сторінки, яке таке ж, як у хедера */
+    background-color: transparent;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Секції локації та фільтрів */
+.locationSection,
+.filtersSection {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Обгортка для інпуту локації */
+.inputWrapper {
+    width: 312px;
+    position: relative;
+}
+
+/* Текст "Location" над інпутом */
+.label {
+    font-size: 16px;
+    color: rgba(16, 24, 40, 0.6);
+    /* Напівпрозорий темний колір */
+    margin-bottom: 8px;
+}
+
+/* Інпут локації (Чисто білий, щоб виділятися на тлі сторінки) */
+.input {
+    width: 100%;
+    height: 56px;
+    padding: 18px 18px 18px 44px;
+    /* Місце ліворуч для іконки мапи */
+    background-color: #FFFFFF;
+    /* Чисто білий колір (Fill: White) */
+    border: none;
+    border-radius: 12px;
+    /* Corner radius: 12 */
+    font-size: 16px;
+    color: #101828;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Головний заголовок "Filters" */
+.filtersTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #475467;
+    margin-bottom: 32px;
+}
+
+/* Група елементів фільтра */
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+/* Назви підгруп (Camper form, Engine, Transmission) */
+.groupTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #101828;
+    margin: 0 0 16px 0;
+    border-bottom: none;
+    /* Жодних підкреслень */
+    padding-bottom: 0;
+}
+
+/* Опція вибору (Радіо-кнопка/Чекбокс + Текст) */
+.optionItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #101828;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Ховаємо стандартний інпут */
+.radio {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Кастомне кільце радіо-кнопки */
+.customRadio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #B1B5C3;
+    /* Світло-сірий контур */
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* Стан радіо-кнопки при виборі */
+.radio:checked~.customRadio {
+    border-color: #101828;
+    /* Стає темним */
+}
+
+/* Крапка всередині активного радіо */
+.radio:checked~.customRadio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #101828;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Блок з кнопками дій */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 312px;
+}
+
+/* Кнопка Search */
+.searchButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* 312px Fill */
+    height: 56px;
+    background-color: #859288;
+    /* Оригінальний Grey-green */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    /* Без підкреслень */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+    background-color: #727F75;
+}
+
+/* Кнопка Clear filters */
+.clearButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    /* 312px Fill */
+    height: 56px;
+    background-color: #FFFFFF;
+    /* Чисто біла як інпут */
+    color: #101828;
+    border: 1px solid rgba(16, 24, 40, 0.1);
+    border-radius: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    /* Без підкреслень */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+    background-color: #F9FAFB;
+    border-color: rgba(16, 24, 40, 0.2);
+}

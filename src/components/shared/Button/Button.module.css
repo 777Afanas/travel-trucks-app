@@ -1,3 +1,4 @@
+/* Базові стилі для всіх кнопок */
 .button {
     display: inline-flex;
     align-items: center;
@@ -11,34 +12,38 @@
     line-height: 1.5;
     white-space: nowrap;
 
-    /* Точні розміри з Figma */
+    /* Розміри та відступи з Figma (173px x 56px Hug) */
     width: 173px;
     height: 56px;
     padding: 16px 60px;
     box-sizing: border-box;
 
     border-radius: 200px;
+    /* Corner radius: 200 з макета */
     cursor: pointer;
     border: 1px solid transparent;
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
+/* Модифікатор для розтягування кнопки на всю ширину (якщо потрібно) */
 .fullWidth {
     width: 100%;
 }
 
-/* Оновлено під точні кольори макету */
+/* --- ВАРІАНТ PRIMARY (Оновлено під точні кольори Grey-green з Figma) --- */
 .primary {
-    background-color: #6C717B;
-    /* Grey-green */
+    background-color: #859288;
+    /* Точний Grey-green з макета */
     color: #ffffff;
+    /* Текст залишається білим */
 }
 
 .primary:hover {
-    background-color: #525A63; /* ЗМІНЕНО: Точний колір Green Hover з макету */
-    /* Green Hover */
+    background-color: #727F75;
+    /* Гармонійний, м'який Grey-green Hover */
 }
 
+/* --- ВАРІАНТ SECONDARY (Наприклад, для кнопки "Load more") --- */
 .secondary {
     background-color: transparent;
     color: #101828;
@@ -47,5 +52,6 @@
 
 .secondary:hover {
     border-color: #101828;
-    background-color: rgba(16, 24, 40, 0.02);
+    background-color: rgba(16, 24, 40, 0.04);
+    /* Трохи помітніший ховер для прозорої кнопки */
 }

@@ -1,0 +1,146 @@
+.camperCard {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    /* Внутрішній відступ з усіх боків чітко 24px */
+    border: 1px solid #dadde1;
+    border-radius: 20px;
+    background-color: #ffffff;
+    width: 840px;
+    /* Точна ширина картки за макетом */
+    height: 264px;
+    /* Точна висота всієї картки разом з фото */
+    box-sizing: border-box;
+}
+
+.imageWrapper {
+    width: 290px;
+    height: 216px;
+    /* 264px висоти мінус 48px падінгів */
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.camperImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.camperInfo {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    color: #101828;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: 600;
+    color: #101828;
+}
+
+.cardMeta {
+    display: flex;
+    gap: 16px;
+    font-size: 16px;
+    margin-bottom: 24px;
+    color: #101828;
+    align-items: center;
+}
+
+.rating {
+    display: inline-flex;
+    align-items: center;
+}
+
+.star {
+    color: #FFC107;
+    /* Точний жовтий колір бренду з Figma */
+    margin-right: 4px;
+    /* Невеликий відступ від цифри рейтингу */
+}
+
+/* Контейнер для іконок локації та рейтингу */
+.location {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #101828;
+}
+
+.metaIcon {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: #101828;
+    /* Колір ліній для карти */
+}
+
+.description {
+    font-size: 16px;
+    color: #475467;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    /* Обрізання тексту в один рядок як на макеті */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Стилізація бейджів-характеристик */
+.featuresTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    /* Відступ до кнопки Show more */
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background-color: #F2F4F7;
+    /* Світло-сірий фон бейджа */
+    border-radius: 100px;
+    /* Повністю закруглені кути */
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #101828;
+    text-transform: capitalize;
+}
+
+/* Стилізація іконок всередині бейджів */
+.tagIcon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #101828;
+    /* Темний колір ліній контуру іконки */
+}
+
+.showMoreLink {
+    text-decoration: none;
+    align-self: flex-start;
+    margin-top: auto;
+    /* Штовхає посилання з кнопкою до самого низу картки, якщо контенту мало */
+}

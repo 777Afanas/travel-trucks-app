@@ -1,3 +1,9 @@
+.header {
+    width: 100%;
+    background-color: #F7F8FA;
+    /* Наш не білий фон з дизайн-системи макету */
+}
+
 .header_container {
     height: 72px;
     padding: 24px 0;

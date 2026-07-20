@@ -1,26 +1,29 @@
-.container {       
+.container {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    /* padding: 40px 64px; */
-    padding: 40px 0;
-    /* Відступ між верхнім блоком та секцією відгуків */
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 64px;
+    /* Точний відступ з макета, латиниця 'px' */
+    box-sizing: border-box;
 }
 
-/* Стилі для верхнього ярусу */
+/* Стилі для верхнього ярусу (Галерея + Опис кемпера) */
 .topSection {
     display: flex;
     gap: 64px;
-    align-items: stretch;
-    /* Змушує ліву і праву частини бути однакової висоти */
+    align-items: flex-start;
+    /* Верхній край картинок та тексту строго на одній лінії */
 }
 
 .galleryColumn {
     flex: 1;
+    min-width: 0;
 }
 
 .infoColumn {
-    width: 448px;
+    width: 600px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -28,21 +31,47 @@
     /* Відступ між CamperInfo та VehicleDetails */
 }
 
-/* Стилі для нижнього ярусу */
+/* СЕКЦІЯ НИЖНЬОГО ЯРУСУ (Заголовок Reviews + Блоки відгуків та форми) */
+
+/* Загальний контейнер для обгортки нижнього ярусу */
+.bottomSectionContainer {
+    width: 100%;
+    margin-top: 40px;
+    /* Відступ від таблиці характеристик до слова Reviews */
+}
+
+/* ЗаголовокReviews височіє чітко над лівою колонкою */
+.sectionTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #101828;
+    margin-top: 0;
+    margin-bottom: 24px;
+    /* Форма і перша картка відгуків стануть на одну лінію */
+}
+
+/* Самі колонки відгуків та форми в один ряд */
 .bottomSection {
     display: flex;
-    gap: 64px;
+    gap: 48px;
+    /* Точний проміжок між колонками за макетом */
     align-items: flex-start;
+    width: 100%;
 }
 
 .reviewsColumn {
-    flex: 1;
+    width: 623px;
+    /* Точна ширина блоку відгуків з макета */
+    flex-shrink: 0;
 }
 
 .formColumn {
-    width: 448px;
+    width: 641px;
+    /* Точна ширина форми з макета */
     flex-shrink: 0;
+    display: flex;
 }
+
 
 
 /* .container {

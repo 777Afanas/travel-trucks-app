@@ -1,9 +1,12 @@
 .formWrapper {
-    border: 1px solid #dadada;
+    border: 1px solid #eaecf0;
+    /* Світла тонка рамка з макета */
     border-radius: 24px;
-    padding: 24px;
+    padding: 32px;
+    /* Збільшений падінг для правильного "дихання" форми */
     background-color: #ffffff;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .formTitle {
@@ -98,7 +101,7 @@
     text-align: left;
 }
 
-.submitBtn {
+/* .submitBtn {
     background-color: #85968a;
     color: #ffffff;
     font-size: 16px;
@@ -110,6 +113,28 @@
     align-self: flex-start;
     margin-top: 10px;
     transition: background-color 0.2s ease;
+} */
+
+.submitBtn {
+    background-color: #85968a;
+    /* Повернув ваш сіро-зелений колір з макета */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+
+    /* Зміни для ширини та висоти за макетом (527x56) */
+    width: 100%;
+    /* Розтягує кнопку на всю ширину (Fill) */
+    height: 56px;
+    /* Точна фіксована висота з макета */
+
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+
+    /* Прибираємо align-self, щоб флекс-контейнер не стискав кнопку */
 }
 
 .submitBtn:hover {

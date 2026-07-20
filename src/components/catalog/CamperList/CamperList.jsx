@@ -1,13 +1,12 @@
 import CamperCard from '../CamperCard/CamperCard';
+import css from './CamperList.module.css';
 
 const CamperList = ({ campers = [] }) => {
   return (
-    <div className="catalog-list-wrapper">
-      <div className="camper-list">
-        {campers.map((camper) => (
-          <CamperCard key={camper.id} camper={camper} />
-        ))}
-      </div>
+    <div className={css.camperList}>
+      {campers.map((camper) => (
+        <CamperCard key={camper.id} camper={camper} />
+      ))}
     </div>
   );
 };

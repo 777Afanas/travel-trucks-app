@@ -1,0 +1,237 @@
+/* Сам контейнер сайдбара фільтрів */
+.sidebar {
+    width: 360px;
+    min-height: 840px;
+    /* Твоя висота блоку фільтрів */
+    padding: 24px;
+    /* Внутрішні відступи для правильного позиціонування контенту */
+    /* background-color: #6C717B; */
+    /* ТОЧНИЙ колір фону блоку з Figma */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    box-sizing: border-box;
+}
+
+
+/* Секції локації та фільтрів */
+.locationSection,
+.filtersSection {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Контейнер інпуту локації */
+/* .inputWrapper {
+    width: 100%;     
+    width: 312px;
+    position: relative;
+} */
+
+/* 1. Обгортка для інпуту та іконки */
+.inputWrapper {
+    width: 312px;
+    position: relative;     
+    display: flex;
+    align-items: center;     
+}
+
+/* Текст "Location" над інпутом */
+.label {
+    font-size: 16px;
+    color: rgba(16, 24, 40, 0.6);
+    /* color: rgba(255, 255, 255, 0.7); */
+    /* Змінено на білий з прозорістю, щоб читалося на сірому */
+    margin-bottom: 8px;
+}
+
+locationIcon {
+    position: absolute;
+    /* Вириваємо з потоку, щоб накласти ПОВЕРХ інпуту */
+    /* left: 18px; */
+    /* Відступ зліва всередині білого поля */
+    top: 50%;
+    /* Зсуваємо на середину висоти */
+    transform: translateY(-50%);
+    /* Ідеальне центрування по вертикалі */    
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #101828;
+    /* Темний колір контуру */
+    pointer-events: none;
+    /* Щоб клік по іконці фокусував інпут */
+    z-index: 2;
+    /* Ставимо поверх білого фону інпуту */
+}
+
+/* Інпут локації (Оновлено під точні розміри Figma) */
+.input {
+    width: 100%;
+    height: 56px;
+    /* H: 56 Hug з макета */
+    padding: 18px 18px 18px 44px;
+    /* Лівий падінг 44px залишає місце під іконку мапи */
+    /* background-color: #FFFFFF; */
+    background-color: #f7f7f7;
+    /* Fill: White */
+    border: none;
+    border-radius: 12px;
+    /* Corner radius: 12 */
+    font-size: 16px;
+    color: #101828;
+    /* Текст всередині інпуту залишається темним */
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* Заголовок "Filters" */
+.filtersTitle {
+    font-size: 16px;
+    font-weight: 500;
+    /* color: #FFFFFF; */     
+    color: #101828;
+    /* color: #475467; */
+    /* Текст змінено на білий */
+    margin-bottom: 32px;
+}
+
+/* Групи підфільтрів (Camper form, Engine, Transmission) */
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+/* Назви підгруп фільтрів */
+.groupTitle {
+    font-size: 20px;
+    font-weight: 600;     
+    color: #475467;
+    /* color: #101828; */
+    /* color: #FFFFFF; */
+    /* Текст змінено на білий */
+    margin: 0 0 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* Тонка біла напівпрозора лінія замість сірої */
+    padding-bottom: 4px;
+}
+
+/* --- СТИЛІЗАЦІЯ КАНДИДАТІВ/ОПЦІЙ (Радіо-кнопки та Чекбокси) --- */
+.optionItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    /* color: #FFFFFF; */
+    color: #101828;
+    /* Текст опцій тепер білий */
+    cursor: pointer;
+    position: relative;
+}
+
+.radio {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Кружальце кастомного радіо */
+.customRadio {
+    width: 20px;
+    height: 20px;
+    /* border: 2px solid #FFFFFF; */
+    border: 2px solid #b1b5c3;
+    /* Білий контур, щоб виділявся на сірому */
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+/* Стан, коли радіо-кнопка вибрана */
+.radio:checked~.customRadio {
+    /* border-color: #859288;     
+    background-color: #859288; */
+    border-color: #101828;
+}
+
+/* Цятка всередині активного радіо */
+.radio:checked~.customRadio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    /* background-color: #FFFFFF; */
+    background-color: #101828;
+    /* Біла цятка всередині */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* --- КОНТЕЙНЕР ДЛЯ КНОПОК АКТИВАЦІЇ/СКИДАННЯ --- */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Кнопка Search */
+.searchButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* Розтягується на всю ширину сайдбара (312px) */
+    height: 56px;
+    background-color: #859288;
+    /* Точний Grey-green з макета */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 200px;
+    /* Повністю овальна */
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    /* Гарантовано прибирає підкреслення */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+    background-color: #727F75;
+}
+
+/* Кнопка Clear filters */
+.clearButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    /* Розтягується на всю ширину сайдбара (312px) */
+    height: 56px;
+    background-color: #FFFFFF;
+    /* Чисто біла кнопка з макета */
+    color: #101828;
+    /* Темний текст */
+    border: none;
+    border-radius: 200px;
+    /* Повністю овальна */
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    /* Гарантовано прибирає підкреслення */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.clearButton:hover {
+    background-color: #F2F4F7;
+}

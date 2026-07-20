@@ -75,10 +75,42 @@ const CatalogPage = () => {
           <div className={css.loaderBackdrop}>
             <div className={css.loaderCard}>
               <div className={css.spinner}></div>
-              <h2>Loading tracks...</h2>
+              <h2
+                style={{
+                  fontSize: "24px",
+                  fontWeight: "600",
+                  margin: "0 0 8px 0",
+                  color: "#101828",
+                }}
+              >
+                Loading tracks...
+              </h2>
+              <p
+                style={{
+                  fontSize: "16px",
+                  color: "#475467",
+                  margin: 0,
+                  textAlign: "center",
+                  lineHeight: "1.5",
+                }}
+              >
+                Please wait while we fetch the best
+                <br />
+                travel trucks for you
+              </p>
             </div>
           </div>
         )}
+
+        {/* СТАН 1: Завантаження
+        {isLoading && campers.length === 0 && (
+          <div className={css.loaderBackdrop}>
+            <div className={css.loaderCard}>
+              <div className={css.spinner}></div>
+              <h2>Loading tracks...</h2>
+            </div>
+          </div>
+        )} */}
 
         {/* СТАН 2: Порожній результат — Передаємо наш handleGlobalReset */}
         {!isLoading && !error && campers.length === 0 && (

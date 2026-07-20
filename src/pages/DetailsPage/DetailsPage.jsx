@@ -40,13 +40,17 @@ const DetailPage = () => {
       </div>
       
       {/* НИЖНІЙ ЯРУС: Відгуки + Форма бронювання */}
-      <div className={css.bottomSection}>
+      <div className={css.bottomSectionContainer}>
+       <h2 className={css.sectionTitle}>Reviews</h2>
+       
+        <div className={css.bottomSection}>
         <div className={css.reviewsColumn}>
           <ReviewList reviews={camper.reviews} />
         </div>
         <div className={css.formColumn}>
           <BookForm camperId={id} />
-        </div>
+          </div>
+        </div>        
       </div>
     </div>
   );

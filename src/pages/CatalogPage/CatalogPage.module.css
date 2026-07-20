@@ -1,17 +1,43 @@
-
+/* ОНОВЛЕНО: Точні пропорції та відступи сторінки згідно з Figma */
 .catalogContainer {
     display: flex;
     gap: 64px;
-    /* Відступ між фільтрами та картками згідно з макетом */
-    padding: 40px 0;     
+    /* Відступ між сайдбаром та картками */
+    max-width: 1264px;
+    /* Точна сума елементів: 360px + 64px + 840px */
+    margin: 0 auto;
+    padding: 48px 0;
+    /* Відступ зверху від хедеру чітко 48px */
 }
 
+/* ЗАЛИШЕНО ЯК БУЛО: Контейнер списку карток */
 .catalogContent {
     flex-grow: 1;
-    position: relative;
-    /* Для позиціонування лоадера, якщо треба */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    /* Відступ між картками у списку чітко 40px */
 }
 
+/* ЗАЛИШЕНО ЯК БУЛО: Стилі для кнопки Load More */
+.loadMoreBtn {
+    padding: 16px 32px;
+    background-color: transparent;
+    border: 1px solid #e0e0e0;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #101828;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.loadMoreBtn:hover {
+    border-color: #101828;
+}
+
+/* ЗАЛИШЕНО ЯК БУЛО: Оновлений Лоадер (543х296px) за новим макетом */
 .loaderBackdrop {
     position: fixed;
     top: 0;
@@ -19,40 +45,37 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.6);
-    /* Легке світле затемнення */
-    backdrop-filter: blur(2px);
-    /* Сучасне легке розмиття фону */
+    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
-    /* Щоб перекривати контент, але не заважати */
 }
 
 .loaderCard {
     background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    /* Легка тінь картки */
+    width: 543px;
+    height: 296px;
+    border-radius: 20px;
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 16px;
+    padding: 32px;
+    box-sizing: border-box;
 }
 
 .spinner {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #f3f3f3;
-    /* Світле кільце */
-    border-top: 5px solid #E44848;
-    /* Колір бренду (червоний, як на макеті) */
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #475467;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    margin-bottom: 24px;
 }
 
-/* Стандартна анімація обертання */
 @keyframes spin {
     0% {
         transform: rotate(0deg);
